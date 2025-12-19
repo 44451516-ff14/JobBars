@@ -102,7 +102,10 @@ namespace JobBars.Nodes.Cooldown {
         public void LoadIcon( ActionIds action ) {
             if( action == LastAction ) return;
             LastAction = action;
-            Icon.LoadIcon( UiHelper.GetIcon( action ) );
+            var actionid = (uint)action;
+            var adjustedAction = UiHelper.GetAdjustedAction(actionid);
+            uint icon = UiHelper.GetIcon( adjustedAction );
+            Icon.LoadIcon(icon);
         }
 
         protected override void Dispose( bool disposing, bool isNativeDestructor ) {

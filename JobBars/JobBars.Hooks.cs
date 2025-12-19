@@ -5,6 +5,7 @@ using JobBars.GameStructs;
 using JobBars.Helper;
 using System;
 using System.Collections.Generic;
+using KamiToolKit.Classes;
 
 namespace JobBars {
     public unsafe partial class JobBars {
@@ -38,6 +39,9 @@ namespace JobBars {
                 Type = ( UiHelper.IsGcd( id ) ? ItemType.GCD : ItemType.OGCD )
             };
 
+     
+
+            
             if( !isParty ) { // don't let party members affect our gauge
                 GaugeManager?.PerformAction( actionItem );
                 IconManager?.PerformAction( actionItem );

@@ -33,7 +33,7 @@ namespace JobBars.Cooldowns.Manager {
 
         public void PerformAction( Item action, uint objectId ) {
             if( !JobBars.Configuration.CooldownsEnabled ) return;
-
+    
             foreach( var member in ObjectIdToMember.Values ) {
                 member.ProcessAction( action, objectId );
             }

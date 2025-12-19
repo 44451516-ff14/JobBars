@@ -6,9 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace JobBars.Cooldowns {
-    public class CooldownTracker {
-        public enum TrackerState {
+namespace JobBars.Cooldowns
+{
+    public class CooldownTracker
+    {
+        public enum TrackerState
+        {
             None,
             Running,
             OnCD,
@@ -25,67 +28,93 @@ namespace JobBars.Cooldowns {
         public TrackerState CurrentState => State;
         public ActionIds Icon => Config.Icon;
 
-        public CooldownTracker( CooldownConfig config ) {
+        public CooldownTracker( CooldownConfig config )
+        {
             Config = config;
         }
 
-        public void ProcessAction( Item action ) {
-            if( Config.Triggers.Contains( action ) ) SetActive( action );
+        public void ProcessAction( Item action )
+        {
+            foreach( var configTrigger in Config.Triggers )
+            {
+                var trigger = configTrigger;
+                var adjustedAction = UiHelper.GetAdjustedAction(trigger.Id);
+                if( adjustedAction == action.Id )
+                {
+                    SetActive( action );
+                }
+            }
         }
 
-        private void SetActive( Item trigger ) {
+        private void SetActive( Item trigger )
+        {
             State = Config.Duration == 0 ? TrackerState.OnCD : TrackerState.Running;
             LastActiveTime = DateTime.Now;
             LastActiveTrigger = trigger;
         }
 
-        public void Tick( Dictionary<Item, Status> buffDict ) {
-            if( State != TrackerState.Running && UiHelper.CheckForTriggers( buffDict, Config.Triggers, out var trigger ) ) SetActive( trigger );
+        public void Tick( Dictionary< Item, Status > buffDict )
+        {
+            if( State != TrackerState.Running &&
+                UiHelper.CheckForTriggers( buffDict, Config.Triggers, out var trigger ) ) SetActive( trigger );
 
-            if( State == TrackerState.Running ) {
-                TimeLeft = UiHelper.TimeLeft( JobBars.Configuration.CooldownsHideActiveBuffDuration ? 0 : Config.Duration, buffDict, LastActiveTrigger, LastActiveTime );
-                if( TimeLeft <= 0 ) {
+            if( State == TrackerState.Running )
+            {
+                TimeLeft = UiHelper.TimeLeft(
+                    JobBars.Configuration.CooldownsHideActiveBuffDuration ? 0 : Config.Duration, buffDict,
+                    LastActiveTrigger, LastActiveTime );
+                if( TimeLeft <= 0 )
+                {
                     TimeLeft = 0;
                     State = TrackerState.OnCD; // mitigation needs to have a CD
                 }
             }
-            else if( State == TrackerState.OnCD ) {
+            else if( State == TrackerState.OnCD )
+            {
                 TimeLeft = ( float )( Config.CD - ( DateTime.Now - LastActiveTime ).TotalSeconds );
 
-                if( TimeLeft <= 0 ) {
+                if( TimeLeft <= 0 )
+                {
                     State = TrackerState.OffCD;
                 }
             }
         }
 
-        public void TickUi( CooldownNode node, float percent ) {
+        public void TickUi( CooldownNode node, float percent )
+        {
             if( node == null ) return;
 
             if( node?.IconId != Config.Icon ) node.LoadIcon( Config.Icon );
 
             node.IsVisible = true;
 
-            if( State == TrackerState.None ) {
+            if( State == TrackerState.None )
+            {
                 node.SetOffCd();
                 node.SetText( "" );
                 node.SetNoDash();
             }
-            else if( State == TrackerState.Running ) {
+            else if( State == TrackerState.Running )
+            {
                 node.SetOffCd();
                 node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
-                if( Config.ShowBorderWhenActive ) {
+                if( Config.ShowBorderWhenActive )
+                {
                     node.SetDash( percent );
                 }
-                else {
+                else
+                {
                     node.SetNoDash();
                 }
             }
-            else if( State == TrackerState.OnCD ) {
+            else if( State == TrackerState.OnCD )
+            {
                 node.SetOnCd();
                 node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
                 node.SetNoDash();
             }
-            else if( State == TrackerState.OffCD ) {
+            else if( State == TrackerState.OffCD )
+            {
                 node.SetOffCd();
                 node.SetText( "" );
                 if( Config.ShowBorderWhenOffCD ) node.SetDash( percent );
@@ -93,7 +122,8 @@ namespace JobBars.Cooldowns {
             }
         }
 
-        public void Reset() {
+        public void Reset()
+        {
             State = TrackerState.None;
         }
     }
