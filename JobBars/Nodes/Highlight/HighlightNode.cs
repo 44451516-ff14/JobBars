@@ -5,15 +5,15 @@ using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Highlight {
     public unsafe class HighlightNode : NodeBase<AtkResNode> {
-        private readonly NineGridNode Highlight;
+        private readonly SimpleNineGridNode Highlight;
 
         public HighlightNode() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             NodeFlags = NodeFlags.AnchorLeft | NodeFlags.AnchorTop;
             Size = new( 100, 100 );
 
-            Highlight = new NineGridNode() {
-                NodeID = JobBars.NodeId++,
+            Highlight = new SimpleNineGridNode() {
+                NodeId = JobBars.NodeId++,
                 Size = new( 320, 48 ),
                 Position = new( 52, 18 ),
                 TextureCoordinates = new( 112, 0 ),
@@ -22,7 +22,7 @@ namespace JobBars.Nodes.Highlight {
                 NodeFlags = NodeFlags.Visible | NodeFlags.AnchorLeft | NodeFlags.AnchorTop,
                 MultiplyColor = new( 150f / 255f, 100f / 255f, 50 / 255f ),
             };
-            Highlight.LoadTexture( "ui/uld/PartyListTargetBase.tex" );
+            Highlight.TexturePath = "ui/uld/PartyListTargetBase.tex";
 
             Highlight.AttachNode( this, NodePosition.AsLastChild );
         }

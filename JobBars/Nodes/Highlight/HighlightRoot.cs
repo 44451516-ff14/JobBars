@@ -9,7 +9,7 @@ namespace JobBars.Nodes.Highlight {
         public readonly List<HighlightNode> Highlights = [];
 
         public HighlightRoot() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             NodeFlags = NodeFlags.Visible | NodeFlags.AnchorLeft | NodeFlags.AnchorTop;
             Size = new( 100, 100 );
             Position = new( -12, 19 );

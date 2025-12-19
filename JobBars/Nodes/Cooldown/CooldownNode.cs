@@ -11,18 +11,18 @@ namespace JobBars.Nodes.Cooldown {
         public static readonly ushort HEIGHT = 30;
 
         private readonly TextNode Text;
-        private readonly ImageNode Icon;
-        private readonly ImageNode Border;
+        private readonly SimpleImageNode Icon;
+        private readonly SimpleImageNode Border;
 
         private ActionIds LastAction = 0;
         public ActionIds IconId => LastAction;
 
         public CooldownNode() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( WIDTH, HEIGHT );
 
-            Icon = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Icon = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 Size = new( WIDTH, HEIGHT ),
                 NodeFlags = NodeFlags.Visible,
                 ImageNodeFlags = ImageNodeFlags.AutoFit,
@@ -30,30 +30,30 @@ namespace JobBars.Nodes.Cooldown {
             };
             Icon.LoadIcon( 405 );
 
-            Border = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Border = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 Size = new( 49, 47 ),
                 NodeFlags = NodeFlags.Visible,
-                WrapMode = WrapMode.Unknown,
+                WrapMode = WrapMode.None,
                 ImageNodeFlags = 0,
                 Position = new( -4, -2 ),
                 TextureCoordinates = new( 0, 96 ),
                 TextureSize = new( 48, 48 ),
                 Scale = new( ( ( float )WIDTH + 8 ) / 49.0f, ( ( float )HEIGHT + 6 ) / 47.0f )
             };
-            Border.LoadTexture( "ui/uld/IconA_Frame.tex", JobBars.Configuration.Use4K ? 2u : 1u );
+            Border.TexturePath = "ui/uld/IconA_Frame.tex";
 
             Text = new TextNode() {
-                NodeID = JobBars.NodeId++,
+                NodeId = JobBars.NodeId++,
                 Size = new( WIDTH, HEIGHT ),
                 FontSize = 21,
                 LineSpacing = ( byte )HEIGHT,
-                AlignmentFontType = 52,
+                AlignmentType = (AlignmentType)52,
                 TextColor = new( 1, 1, 1, 1 ),
                 TextOutlineColor = new( 0, 0, 0, 1 ),
                 TextId = 0,
                 TextFlags = TextFlags.Glare,
-                Text = "",
+                String = "",
             };
 
             Icon.AttachNode( this, NodePosition.AsLastChild );
@@ -81,7 +81,7 @@ namespace JobBars.Nodes.Cooldown {
 
         public void SetText( string text ) {
             Text.FontSize = text.Length > 2 ? ( byte )17 : ( byte )21;
-            Text.Text = text;
+            Text.String = text;
             Text.IsVisible = true;
         }
 

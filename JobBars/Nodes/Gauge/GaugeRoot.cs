@@ -15,7 +15,7 @@ namespace JobBars.Nodes.Gauge {
         public readonly List<DiamondNode> Diamonds = [];
 
         public GaugeRoot() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 256, 100 );
 
             for( var i = 0; i < MAX_GAUGES; i++ ) {

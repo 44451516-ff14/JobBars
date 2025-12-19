@@ -6,60 +6,60 @@ using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Gauge.Diamond {
     public unsafe class DiamondTick : NodeBase<AtkResNode> {
-        public readonly ImageNode Background;
+        public readonly SimpleImageNode Background;
         public readonly ResNode SelectedContainer;
-        public readonly ImageNode Selected;
+        public readonly SimpleImageNode Selected;
         public readonly TextNode Text;
 
         private ElementColor TickColor = ColorConstants.NoColor;
 
         public DiamondTick() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 32, 32 );
 
-            Background = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Background = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 Size = new( 32, 32 ),
                 TextureCoordinates = new( 0, 0 ),
                 TextureSize = new( 32, 32 ),
                 NodeFlags = NodeFlags.Visible,
-                WrapMode = WrapMode.Unknown,
+                WrapMode = WrapMode.None,
                 ImageNodeFlags = 0,
             };
-            Background.LoadTexture( "ui/uld/JobHudSimple_StackA.tex", JobBars.Configuration.Use4K ? 2u : 1u );
+            Background.TexturePath = "ui/uld/JobHudSimple_StackA.tex";
 
             SelectedContainer = new ResNode() {
-                NodeID = JobBars.NodeId++,
+                NodeId = JobBars.NodeId++,
                 Size = new( 32, 32 ),
                 Origin = new( 16, 16 ),
                 NodeFlags = NodeFlags.Visible,
             };
 
-            Selected = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Selected = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 Size = new( 32, 32 ),
                 Origin = new( 16, 16 ),
                 TextureCoordinates = new( 32, 0 ),
                 TextureSize = new( 32, 32 ),
                 NodeFlags = NodeFlags.Visible,
-                WrapMode = WrapMode.Unknown,
+                WrapMode = WrapMode.None,
                 ImageNodeFlags = 0,
             };
-            Selected.LoadTexture( "ui/uld/JobHudSimple_StackA.tex", JobBars.Configuration.Use4K ? 2u : 1u );
+            Selected.TexturePath = "ui/uld/JobHudSimple_StackA.tex";
 
             Text = new TextNode() {
-                NodeID = JobBars.NodeId++,
+                NodeId = JobBars.NodeId++,
                 Position = new( 0, 20 ),
                 Size = new( 32, 32 ),
                 FontSize = 14,
                 LineSpacing = 14,
-                AlignmentFontType = 4,
+                AlignmentType = (AlignmentType)4,
                 NodeFlags = NodeFlags.Visible | NodeFlags.AnchorLeft | NodeFlags.AnchorRight,
                 TextColor = new( 1, 1, 1, 1 ),
                 TextOutlineColor = new( 40f / 255f, 40f / 255f, 40f / 255f, 1 ),
                 TextId = 0,
                 TextFlags = TextFlags.Glare,
-                Text = "",
+                String = "",
             };
 
             Selected.AttachNode( SelectedContainer, NodePosition.AsLastChild );

@@ -20,8 +20,9 @@ namespace JobBars.Nodes.Gauge {
         }
 
         public virtual unsafe void SetSplitPosition( Vector2 pos ) {
-            var p = UiHelper.GetGlobalPosition( JobBars.NodeBuilder.GaugeRoot.InternalResNode );
-            var pScale = UiHelper.GetGlobalScale( JobBars.NodeBuilder.GaugeRoot.InternalResNode );
+            var gaugeRoot = JobBars.NodeBuilder.GaugeRoot;
+            var p = UiHelper.GetGlobalPosition( gaugeRoot );
+            var pScale = UiHelper.GetGlobalScale( gaugeRoot );
             Position = new( ( pos.X - p.X ) / pScale.X, ( pos.Y - p.Y ) / pScale.Y );
         }
     }

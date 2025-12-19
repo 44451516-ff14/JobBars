@@ -12,9 +12,9 @@ namespace JobBars.Nodes.Buff {
         public static ushort HEIGHT => ( ushort )( JobBars.Configuration.BuffSquare ? 40 : 28 );
 
         private readonly TextNode Text;
-        private readonly ImageNode Overlay;
-        private readonly ImageNode Icon;
-        private readonly NineGridNode Border;
+        private readonly SimpleImageNode Overlay;
+        private readonly SimpleImageNode Icon;
+        private readonly SimpleNineGridNode Border;
 
         private ActionIds LastAction = 0;
         public ActionIds IconId => LastAction;
@@ -22,47 +22,47 @@ namespace JobBars.Nodes.Buff {
         private string CurrentText = "";
 
         public BuffNode() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
 
-            Icon = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Icon = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 NodeFlags = NodeFlags.Visible | NodeFlags.AnchorLeft | NodeFlags.AnchorTop,
-                WrapMode = WrapMode.Unknown,
+                WrapMode = WrapMode.None,
                 ImageNodeFlags = 0
             };
             Icon.LoadIcon( 405 );
 
-            Overlay = new ImageNode() {
-                NodeID = JobBars.NodeId++,
+            Overlay = new SimpleImageNode() {
+                NodeId = JobBars.NodeId++,
                 Height = 1,
                 TextureCoordinates = new( 365, 4 ),
                 TextureSize = new( 37, 37 ),
                 NodeFlags = NodeFlags.Visible,
-                WrapMode = WrapMode.Unknown,
+                WrapMode = WrapMode.None,
                 ImageNodeFlags = 0,
             };
-            Overlay.LoadTexture( "ui/uld/IconA_Frame.tex", JobBars.Configuration.Use4K ? 2u : 1u );
+            Overlay.TexturePath = "ui/uld/IconA_Frame.tex";
 
-            Border = new NineGridNode() {
-                NodeID = JobBars.NodeId++,
+            Border = new SimpleNineGridNode() {
+                NodeId = JobBars.NodeId++,
                 Position = new( -4, -3 ),
                 Offsets = new( 5, 5, 5, 5 ),
-                PartsRenderType = PartsRenderType.RenderType,
+                PartsRenderType = 0,
                 NodeFlags = NodeFlags.Visible,
             };
-            Border.LoadTexture( "ui/uld/IconA_Frame.tex", JobBars.Configuration.Use4K ? 2u : 1u );
+            Border.TexturePath = "ui/uld/IconA_Frame.tex";
 
             Text = new TextNode() {
-                NodeID = JobBars.NodeId++,
+                NodeId = JobBars.NodeId++,
                 FontSize = ( byte )JobBars.Configuration.BuffTextSize_v2,
                 LineSpacing = ( byte )JobBars.Configuration.BuffTextSize_v2,
-                AlignmentFontType = 52,
+                AlignmentType = (AlignmentType)52,
                 NodeFlags = NodeFlags.Visible,
                 TextColor = new( 1, 1, 1, 1 ),
                 TextOutlineColor = new( 0, 0, 0, 1 ),
                 TextId = 0,
                 TextFlags = TextFlags.Glare,
-                Text = "",
+                String = "",
             };
 
             Icon.AttachNode( this, NodePosition.AsLastChild );
@@ -117,7 +117,7 @@ namespace JobBars.Nodes.Buff {
 
         public void SetText( string text ) {
             if( text != CurrentText ) {
-                Text.Text = text;
+                Text.String = text;
                 CurrentText = text;
             }
             Text.IsVisible = true;

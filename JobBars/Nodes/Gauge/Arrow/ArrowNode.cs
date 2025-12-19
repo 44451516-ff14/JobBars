@@ -12,7 +12,7 @@ namespace JobBars.Nodes.Gauge.Arrow {
         public static readonly int MAX_ITEMS = 12;
 
         public ArrowNode() : base() {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 160, 46 );
 
             for( var idx = 0; idx < MAX_ITEMS; idx++ ) {

@@ -11,7 +11,7 @@ namespace JobBars.Nodes.Gauge.Diamond {
         public static readonly int MAX_ITEMS = 12;
 
         public DiamondNode() : base() {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 160, 46 );
 
             for( var idx = 0; idx < MAX_ITEMS; idx++ ) {
@@ -43,7 +43,7 @@ namespace JobBars.Nodes.Gauge.Diamond {
         }
 
         public void SetText( int idx, string text ) {
-            Ticks[idx].Text.Text = text;
+            Ticks[idx].Text.String = text;
             Ticks[idx].Text.IsVisible = true;
         }
 

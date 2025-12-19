@@ -11,7 +11,7 @@ namespace JobBars.Nodes.Cooldown {
         public static readonly int MAX_ITEMS = 10;
 
         public CooldownRow() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( ( 3 + CooldownNode.WIDTH ) * MAX_ITEMS, CooldownNode.HEIGHT );
 
             for( var idx = 0; idx < MAX_ITEMS; idx++ ) {

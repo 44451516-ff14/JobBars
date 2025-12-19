@@ -12,7 +12,7 @@ namespace JobBars.Nodes.Buff {
         public static int BUFFS_HORIZONTAL => JobBars.Configuration.BuffHorizontal;
 
         public BuffRoot() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 256, 100 );
 
             for( var i = 0; i < MAX_BUFFS; i++ ) {

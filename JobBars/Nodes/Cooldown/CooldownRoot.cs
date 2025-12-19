@@ -12,7 +12,7 @@ namespace JobBars.Nodes.Cooldown {
         public static int BUFFS_HORIZONTAL => JobBars.Configuration.BuffHorizontal;
 
         public CooldownRoot() : base( NodeType.Res ) {
-            NodeID = JobBars.NodeId++;
+            NodeId = JobBars.NodeId++;
             Size = new( 100, 100 );
             Position = JobBars.Configuration.CooldownPosition;
             NodeFlags = NodeFlags.Visible;
