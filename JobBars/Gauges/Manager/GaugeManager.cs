@@ -18,7 +18,9 @@ namespace JobBars.Gauges.Manager {
         public void SetJob( JobIds job ) {
             foreach( var gauge in CurrentGauges ) gauge.Cleanup();
             CurrentGauges.Clear();
-            JobBars.NodeBuilder.GaugeRoot.HideAll();
+            if( JobBars.NodeBuilder.GaugeRoot != null ) {
+                JobBars.NodeBuilder.GaugeRoot.HideAll();
+            }
 
             CurrentJob = job;
             for( var idx = 0; idx < CurrentConfigs.Length; idx++ ) {
@@ -34,6 +36,8 @@ namespace JobBars.Gauges.Manager {
         }
 
         public void Tick() {
+            if( JobBars.NodeBuilder.GaugeRoot == null ) return;
+
             if( UiHelper.CalcDoHide( JobBars.Configuration.GaugesEnabled, JobBars.Configuration.GaugesHideOutOfCombat, JobBars.Configuration.GaugesHideWeaponSheathed ) ) {
                 JobBars.NodeBuilder.GaugeRoot.IsVisible = false;
                 return;
@@ -54,6 +58,8 @@ namespace JobBars.Gauges.Manager {
         private Vector2 GetPerJobPosition() => JobBars.Configuration.GaugePerJobPosition.Get( $"{CurrentJob}" );
 
         public void UpdatePositionScale() {
+            if( JobBars.NodeBuilder.GaugeRoot == null ) return;
+
             NodeBuilder.SetPositionGlobal( JobBars.NodeBuilder.GaugeRoot,
                 JobBars.Configuration.GaugePositionType == GaugePositionType.PerJob ? GetPerJobPosition() : JobBars.Configuration.GaugePositionGlobal );
             NodeBuilder.SetScaleGlobal( JobBars.NodeBuilder.GaugeRoot, JobBars.Configuration.GaugeScale );
