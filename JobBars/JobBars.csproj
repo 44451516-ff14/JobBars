@@ -4,8 +4,7 @@
     <Company></Company>
     <Product>JobBars</Product>
     <Copyright>Copyright © 2020</Copyright>
-    <AssemblyVersion>1.3.2.1</AssemblyVersion>
-    <FileVersion>1.3.2.1</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>

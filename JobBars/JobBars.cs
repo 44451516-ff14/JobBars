@@ -11,6 +11,7 @@ using JobBars.Gauges.Manager;
 using JobBars.Helper;
 using JobBars.Icons.Manager;
 using JobBars.Nodes.Builder;
+using KamiToolKit;
 using System;
 
 namespace JobBars {
@@ -32,6 +33,7 @@ namespace JobBars {
 
         public JobBars( IDalamudPluginInterface pluginInterface ) {
             pluginInterface.Create<Dalamud>();
+            KamiToolKitLibrary.Initialize(pluginInterface);
 
             UiHelper.Setup();
             ColorConstants.SetupColors();
@@ -94,6 +96,7 @@ namespace JobBars {
 
             Animation.Dispose();
             NodeBuilder?.Dispose();
+            KamiToolKitLibrary.Cleanup();
         }
 
         private void OnFrameworkUpdate( IFramework framework ) {
