@@ -107,7 +107,7 @@ namespace JobBars.Helper {
             foreach( var classJob in JobSheet ) {
                 if( classJob.RowId == ( uint )job ) return ToTitleCase( classJob.Name.ExtractText() );
             }
-            return "ERROR";
+            return "错误";
         }
 
         private static string ConvertItemToString( Item item ) {

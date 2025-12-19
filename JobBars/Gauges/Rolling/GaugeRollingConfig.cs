@@ -3,7 +3,9 @@ using System;
 
 namespace JobBars.Gauges.Rolling {
     public enum GaugeGCDRollingType {
+        [System.ComponentModel.Description("GCD")]
         GCD,
+        [System.ComponentModel.Description("咏唱时间")]
         CastTime
     }
 
@@ -25,12 +27,12 @@ namespace JobBars.Gauges.Rolling {
         public override GaugeTracker GetTracker( int idx ) => new GaugeRollingTracker( this, idx );
 
         protected override void DrawConfig( string id, ref bool newVisual, ref bool reset ) {
-            if( JobBars.Configuration.GaugeGCDRolling.Draw( $"Data type{id}", Name, ValidRollingType, RollingType, out var newRollingType ) ) {
+            if( JobBars.Configuration.GaugeGCDRolling.Draw( $"数据类型{id}", Name, ValidRollingType, RollingType, out var newRollingType ) ) {
                 RollingType = newRollingType;
                 newVisual = true;
             }
 
-            if( JobBars.Configuration.GaugeColor.Draw( $"Color{id}", Name, Color, out var newColor ) ) {
+            if( JobBars.Configuration.GaugeColor.Draw( $"颜色{id}", Name, Color, out var newColor ) ) {
                 Color = newColor;
                 newVisual = true;
             }

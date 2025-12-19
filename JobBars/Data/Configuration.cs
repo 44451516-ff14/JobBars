@@ -13,20 +13,29 @@ using static JobBars.Icons.IconReplacer;
 
 namespace JobBars.Data {
     public enum GaugePositionType {
+        [System.ComponentModel.Description("全局")]
         Global,
+        [System.ComponentModel.Description("按职业")]
         PerJob,
+        [System.ComponentModel.Description("分离")]
         Split
     }
 
     public enum CursorPositionType {
+        [System.ComponentModel.Description("鼠标光标")]
         MouseCursor,
+        [System.ComponentModel.Description("中间")]
         Middle,
+        [System.ComponentModel.Description("自定义位置")]
         CustomPosition
     }
 
     public enum AttachAddon {
+        [System.ComponentModel.Description("聊天框")]
         Chatbox,
+        [System.ComponentModel.Description("HP/MP条")]
         HP_MP_Bars,
+        [System.ComponentModel.Description("队伍列表")]
         PartyList
     }
 

@@ -11,28 +11,28 @@ namespace JobBars.Gauges.Manager {
         private static readonly GaugePositionType[] ValidGaugePositionType = ( GaugePositionType[] )Enum.GetValues( typeof( GaugePositionType ) );
 
         private readonly InfoBox<GaugeManager> PositionInfoBox = new() {
-            Label = "Position",
+            Label = "位置",
             ContentsAction = ( GaugeManager manager ) => {
-                ImGui.Checkbox( "Position locked" + manager.Id, ref manager.LOCKED );
+                ImGui.Checkbox( "锁定位置" + manager.Id, ref manager.LOCKED );
 
                 if( JobBars.Configuration.GaugePositionType != GaugePositionType.Split ) {
-                    if( ImGui.Checkbox( "Horizontal gauges", ref JobBars.Configuration.GaugeHorizontal ) ) {
+                    if( ImGui.Checkbox( "横向量表", ref JobBars.Configuration.GaugeHorizontal ) ) {
                         manager.UpdatePositionScale();
                         JobBars.Configuration.Save();
                     }
 
-                    if( ImGui.Checkbox( "Bottom-to-top", ref JobBars.Configuration.GaugeBottomToTop ) ) {
+                    if( ImGui.Checkbox( "从下到上", ref JobBars.Configuration.GaugeBottomToTop ) ) {
                         manager.UpdatePositionScale();
                         JobBars.Configuration.Save();
                     }
 
-                    if( ImGui.Checkbox( "Align right", ref JobBars.Configuration.GaugeAlignRight ) ) {
+                    if( ImGui.Checkbox( "右对齐", ref JobBars.Configuration.GaugeAlignRight ) ) {
                         manager.UpdatePositionScale();
                         JobBars.Configuration.Save();
                     }
                 }
 
-                if( JobBars.DrawCombo( ValidGaugePositionType, JobBars.Configuration.GaugePositionType, "Gauge positioning", manager.Id, out var newPosition ) ) {
+                if( JobBars.DrawCombo( ValidGaugePositionType, JobBars.Configuration.GaugePositionType, "量表定位", manager.Id, out var newPosition ) ) {
                     JobBars.Configuration.GaugePositionType = newPosition;
                     JobBars.Configuration.Save();
 
@@ -41,18 +41,18 @@ namespace JobBars.Gauges.Manager {
 
                 if( JobBars.Configuration.GaugePositionType == GaugePositionType.Global ) { // GLOBAL POSITIONING
                     var pos = JobBars.Configuration.GaugePositionGlobal;
-                    if( ImGui.InputFloat2( "Position" + manager.Id, ref pos ) ) {
+                    if( ImGui.InputFloat2( "位置" + manager.Id, ref pos ) ) {
                         SetGaugePositionGlobal( pos );
                     }
                 }
                 else if( JobBars.Configuration.GaugePositionType == GaugePositionType.PerJob ) { // PER-JOB POSITIONING
                     var pos = manager.GetPerJobPosition();
-                    if( ImGui.InputFloat2( $"Position ({manager.CurrentJob})" + manager.Id, ref pos ) ) {
+                    if( ImGui.InputFloat2( $"位置 ({manager.CurrentJob})" + manager.Id, ref pos ) ) {
                         SetGaugePositionPerJob( manager.CurrentJob, pos );
                     }
                 }
 
-                if( ImGui.InputFloat( "Scale" + manager.Id, ref JobBars.Configuration.GaugeScale ) ) {
+                if( ImGui.InputFloat( "缩放" + manager.Id, ref JobBars.Configuration.GaugeScale ) ) {
                     manager.UpdatePositionScale();
                     JobBars.Configuration.Save();
                 }
@@ -60,15 +60,15 @@ namespace JobBars.Gauges.Manager {
         };
 
         private readonly InfoBox<GaugeManager> HideWhenInfoBox = new() {
-            Label = "Hide When",
+            Label = "隐藏条件",
             ContentsAction = ( GaugeManager manager ) => {
-                if( ImGui.Checkbox( "Out of combat", ref JobBars.Configuration.GaugesHideOutOfCombat ) ) JobBars.Configuration.Save();
-                if( ImGui.Checkbox( "Weapon sheathed", ref JobBars.Configuration.GaugesHideWeaponSheathed ) ) JobBars.Configuration.Save();
+                if( ImGui.Checkbox( "战斗外", ref JobBars.Configuration.GaugesHideOutOfCombat ) ) JobBars.Configuration.Save();
+                if( ImGui.Checkbox( "收武器时", ref JobBars.Configuration.GaugesHideWeaponSheathed ) ) JobBars.Configuration.Save();
             }
         };
 
         protected override void DrawHeader() {
-            if( ImGui.Checkbox( "Gauges Enabled" + Id, ref JobBars.Configuration.GaugesEnabled ) ) {
+            if( ImGui.Checkbox( "启用量表" + Id, ref JobBars.Configuration.GaugesEnabled ) ) {
                 JobBars.Configuration.Save();
             }
         }
@@ -77,10 +77,10 @@ namespace JobBars.Gauges.Manager {
             PositionInfoBox.Draw( this );
             HideWhenInfoBox.Draw( this );
 
-            if( ImGui.Checkbox( "Pulse diamond and arrow color", ref JobBars.Configuration.GaugePulse ) ) JobBars.Configuration.Save();
+            if( ImGui.Checkbox( "脉冲钻石和箭头颜色", ref JobBars.Configuration.GaugePulse ) ) JobBars.Configuration.Save();
 
             ImGui.SetNextItemWidth( 50f );
-            if( ImGui.InputFloat( "Slidecast seconds (0 = off)", ref JobBars.Configuration.GaugeSlidecastTime ) ) JobBars.Configuration.Save();
+            if( ImGui.InputFloat( "滑读秒数 (0 = 关闭)", ref JobBars.Configuration.GaugeSlidecastTime ) ) JobBars.Configuration.Save();
         }
 
         public void DrawPositionBox() {
@@ -90,27 +90,27 @@ namespace JobBars.Gauges.Manager {
             }
             else if( JobBars.Configuration.GaugePositionType == GaugePositionType.PerJob ) {
                 var currentPos = GetPerJobPosition();
-                if( JobBars.DrawPositionView( $"Gauge Bar ({CurrentJob})##GaugePosition", currentPos, out var pos ) ) {
+                if( JobBars.DrawPositionView( $"量表栏 ({CurrentJob})##GaugePosition", currentPos, out var pos ) ) {
                     SetGaugePositionPerJob( CurrentJob, pos );
                 }
             }
             else { // GLOBAL
                 var currentPos = JobBars.Configuration.GaugePositionGlobal;
-                if( JobBars.DrawPositionView( "Gauge Bar##GaugePosition", currentPos, out var pos ) ) {
+                if( JobBars.DrawPositionView( "量表栏##GaugePosition", currentPos, out var pos ) ) {
                     SetGaugePositionGlobal( pos );
                 }
             }
         }
 
         private static void SetGaugePositionGlobal( Vector2 pos ) {
-            JobBars.SetWindowPosition( "Gauge Bar##GaugePosition", pos );
+            JobBars.SetWindowPosition( "量表栏##GaugePosition", pos );
             JobBars.Configuration.GaugePositionGlobal = pos;
             JobBars.Configuration.Save();
             NodeBuilder.SetPositionGlobal( JobBars.NodeBuilder.GaugeRoot, pos );
         }
 
         private static void SetGaugePositionPerJob( JobIds job, Vector2 pos ) {
-            JobBars.SetWindowPosition( $"Gauge Bar ({job})##GaugePosition", pos );
+            JobBars.SetWindowPosition( $"量表栏 ({job})##GaugePosition", pos );
             JobBars.Configuration.GaugePerJobPosition.Set( $"{job}", pos );
             JobBars.Configuration.Save();
             NodeBuilder.SetPositionGlobal( JobBars.NodeBuilder.GaugeRoot, pos );

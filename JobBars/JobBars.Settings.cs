@@ -1,6 +1,7 @@
 using Dalamud.Bindings.ImGui;
 using Dalamud.Interface.Utility;
 using JobBars.Data;
+using JobBars.Helper;
 using System;
 using System.Numerics;
 
@@ -13,27 +14,27 @@ namespace JobBars {
         public static readonly Vector4 GREEN_COLOR = new( 0.36078431373f, 0.72156862745f, 0.36078431373f, 1.0f );
 
         private readonly InfoBox<JobBars> RequiresRestartInfoBox = new() {
-            Label = "Requires Restart",
+            Label = "需要重启",
             ContentsAction = ( JobBars item ) => {
-                if( ImGui.Checkbox( "Use 4K textures##JobBars_Settings", ref Configuration.Use4K ) ) {
+                if( ImGui.Checkbox( "使用4K纹理##JobBars_Settings", ref Configuration.Use4K ) ) {
                     Configuration.Save();
                 }
 
                 ImGui.SetNextItemWidth( 200f );
-                if( DrawCombo( ValidAttachTypes, Configuration.AttachAddon, "Gauge/Buff/Cursor UI element", "##JobBars_Settings", out var newAttach ) ) {
+                if( DrawCombo( ValidAttachTypes, Configuration.AttachAddon, "量表/增益/光标UI元素", "##JobBars_Settings", out var newAttach ) ) {
                     Configuration.AttachAddon = newAttach;
                     Configuration.Save();
                 }
 
                 ImGui.SetNextItemWidth( 200f );
-                if( DrawCombo( ValidAttachTypes, Configuration.CooldownAttachAddon, "Cooldown UI element", "##JobBars_Settings", out var newCDAttach ) ) {
+                if( DrawCombo( ValidAttachTypes, Configuration.CooldownAttachAddon, "冷却时间UI元素", "##JobBars_Settings", out var newCDAttach ) ) {
                     Configuration.CooldownAttachAddon = newCDAttach;
                     Configuration.Save();
                 }
             }
         };
 
-        private static readonly string Text = "Choosing UI elements will not work with plugins which hide them (such as Chat2 for Chatbox, DelvUI for PartyList). Also, when selecting PartyList for gauges, make sure to have \"Hide party list when solo\" turned off in Character Configuation > UI Settings > Party List.";
+        private static readonly string Text = "选择UI元素时，如果其他插件隐藏了这些元素（例如Chat2隐藏聊天框，DelvUI隐藏队伍列表），将无法正常工作。另外，当为量表选择队伍列表时，请确保在角色设置 > UI设置 > 队伍列表中关闭\"单人时隐藏队伍列表\"选项。";
 
         protected static void DisplayWarning() {
             ImGui.PushStyleColor( ImGuiCol.Border, new Vector4( 1, 0, 0, 0.3f ) );
@@ -60,7 +61,7 @@ namespace JobBars {
 
             var _ID = "##JobBars_Settings";
             ImGui.SetNextWindowSize( new Vector2( 600, 1000 ), ImGuiCond.FirstUseEver );
-            if( ImGui.Begin( "JobBars Settings", ref Visible ) ) {
+            if( ImGui.Begin( "JobBars 设置", ref Visible ) ) {
                 RequiresRestartInfoBox.Draw( this );
 
                 DisplayWarning();
@@ -70,27 +71,27 @@ namespace JobBars {
                 // ==========================
 
                 ImGui.BeginTabBar( "Tabs" + _ID );
-                if( ImGui.BeginTabItem( "Gauges" + _ID ) ) {
+                if( ImGui.BeginTabItem( "量表" + _ID ) ) {
                     GaugeManager?.Draw();
                     ImGui.EndTabItem();
                 }
 
-                if( ImGui.BeginTabItem( "Icons" + _ID ) ) {
+                if( ImGui.BeginTabItem( "图标" + _ID ) ) {
                     IconManager?.Draw();
                     ImGui.EndTabItem();
                 }
 
-                if( ImGui.BeginTabItem( "Buffs" + _ID ) ) {
+                if( ImGui.BeginTabItem( "增益" + _ID ) ) {
                     BuffManager?.Draw();
                     ImGui.EndTabItem();
                 }
 
-                if( ImGui.BeginTabItem( "Cooldowns" + _ID ) ) {
+                if( ImGui.BeginTabItem( "冷却时间" + _ID ) ) {
                     CooldownManager?.Draw();
                     ImGui.EndTabItem();
                 }
 
-                if( ImGui.BeginTabItem( "Cursor" + _ID ) ) {
+                if( ImGui.BeginTabItem( "光标" + _ID ) ) {
                     CursorManager?.Draw();
                     ImGui.EndTabItem();
                 }
@@ -151,9 +152,11 @@ namespace JobBars {
         public static bool DrawCombo<T>( T[] validOptions, T currentValue, string label, string _ID, out T newValue ) {
             newValue = currentValue;
             var ret = false;
-            if( ImGui.BeginCombo( label + _ID, $"{currentValue}" ) ) {
+            var displayText = currentValue is Enum e ? e.GetDescription() : $"{currentValue}";
+            if( ImGui.BeginCombo( label + _ID, displayText ) ) {
                 foreach( var value in validOptions ) {
-                    if( ImGui.Selectable( $"{value}" + _ID, value.Equals( currentValue ) ) ) {
+                    var selectText = value is Enum enumVal ? enumVal.GetDescription() : $"{value}";
+                    if( ImGui.Selectable( selectText + _ID, value.Equals( currentValue ) ) ) {
                         ret = true;
                         newValue = value;
                     }

@@ -51,24 +51,24 @@ namespace JobBars.Cooldowns {
                 ImGui.Indent();
 
                 if( isCustom ) {
-                    if( JobBars.RemoveButton( $"Delete", true ) ) deleteCustom = true;
+                    if( JobBars.RemoveButton( $"删除", true ) ) deleteCustom = true;
                 }
 
-                if( JobBars.Configuration.CooldownEnabled.Draw( "Enabled", NameId, Enabled, out var newEnabled ) ) {
+                if( JobBars.Configuration.CooldownEnabled.Draw( "启用", NameId, Enabled, out var newEnabled ) ) {
                     Enabled = newEnabled;
                     reset = true;
                 }
 
-                if( JobBars.Configuration.CooldownOrder.Draw( "Order", NameId, Order, out var newOrder ) ) {
+                if( JobBars.Configuration.CooldownOrder.Draw( "顺序", NameId, Order, out var newOrder ) ) {
                     Order = newOrder;
                     reset = true;
                 }
 
-                if( JobBars.Configuration.CooldownShowBorderWhenActive.Draw( "Show border when active", NameId, ShowBorderWhenActive, out var newShowBorderWhenActive ) ) {
+                if( JobBars.Configuration.CooldownShowBorderWhenActive.Draw( "激活时显示边框", NameId, ShowBorderWhenActive, out var newShowBorderWhenActive ) ) {
                     ShowBorderWhenActive = newShowBorderWhenActive;
                 }
 
-                if( JobBars.Configuration.CooldownShowBorderWhenOffCD.Draw( "Show border when off CD", NameId, ShowBorderWhenOffCD, out var newShowBorderWhenOffCD ) ) {
+                if( JobBars.Configuration.CooldownShowBorderWhenOffCD.Draw( "冷却完毕时显示边框", NameId, ShowBorderWhenOffCD, out var newShowBorderWhenOffCD ) ) {
                     ShowBorderWhenOffCD = newShowBorderWhenOffCD;
                 }
 

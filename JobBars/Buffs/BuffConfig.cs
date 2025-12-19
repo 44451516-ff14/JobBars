@@ -50,12 +50,12 @@ namespace JobBars.Buffs {
                 ImGui.PopStyleColor();
                 ImGui.Indent();
 
-                if( JobBars.Configuration.BuffEnabled.Draw( $"Enabled{_id}{Name}", Name, Enabled, out var newEnabled ) ) {
+                if( JobBars.Configuration.BuffEnabled.Draw( $"启用{_id}{Name}", Name, Enabled, out var newEnabled ) ) {
                     Enabled = newEnabled;
                     reset = true;
                 }
 
-                if( JobBars.Configuration.BuffPartyListHighlight.Draw( $"Highlight party members when active{_id}{Name}", Name, PartyListHighlight, out var newPartyListHighlight ) ) {
+                if( JobBars.Configuration.BuffPartyListHighlight.Draw( $"激活时高亮队友{_id}{Name}", Name, PartyListHighlight, out var newPartyListHighlight ) ) {
                     PartyListHighlight = newPartyListHighlight;
                 }
 

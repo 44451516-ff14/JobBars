@@ -4,15 +4,15 @@ using JobBars.Data;
 namespace JobBars.Icons.Manager {
     public partial class IconManager {
         private readonly InfoBox<IconManager> LargeIconInfoBox = new() {
-            Label = "Large Text",
+            Label = "大文字",
             ContentsAction = ( IconManager manager ) => {
-                if( ImGui.Checkbox( "Buff icons" + manager.Id, ref JobBars.Configuration.IconBuffLarge ) ) JobBars.Configuration.Save();
-                if( ImGui.Checkbox( "Timer icons" + manager.Id, ref JobBars.Configuration.IconTimerLarge ) ) JobBars.Configuration.Save();
+                if( ImGui.Checkbox( "增益图标" + manager.Id, ref JobBars.Configuration.IconBuffLarge ) ) JobBars.Configuration.Save();
+                if( ImGui.Checkbox( "计时器图标" + manager.Id, ref JobBars.Configuration.IconTimerLarge ) ) JobBars.Configuration.Save();
             }
         };
 
         protected override void DrawHeader() {
-            if( ImGui.Checkbox( "Icon replacement enabled", ref JobBars.Configuration.IconsEnabled ) ) {
+            if( ImGui.Checkbox( "启用图标替换", ref JobBars.Configuration.IconsEnabled ) ) {
                 JobBars.Configuration.Save();
                 Reset();
             }

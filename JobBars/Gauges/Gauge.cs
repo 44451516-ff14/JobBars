@@ -3,9 +3,13 @@ using System.Numerics;
 
 namespace JobBars.Gauges {
     public enum GaugeVisualType {
+        [System.ComponentModel.Description("条")]
         Bar,
+        [System.ComponentModel.Description("箭头")]
         Arrow,
+        [System.ComponentModel.Description("钻石")]
         Diamond,
+        [System.ComponentModel.Description("条+钻石")]
         BarDiamondCombo
     }
 
@@ -16,9 +20,13 @@ namespace JobBars.Gauges {
     }
 
     public enum GaugeCompleteSoundType {
+        [System.ComponentModel.Description("满时")]
         When_Full,
+        [System.ComponentModel.Description("空时")]
         When_Empty,
+        [System.ComponentModel.Description("空或满时")]
         When_Empty_or_Full,
+        [System.ComponentModel.Description("从不")]
         Never
     }
 

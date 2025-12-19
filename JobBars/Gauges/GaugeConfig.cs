@@ -53,28 +53,28 @@ namespace JobBars.Gauges {
         public void Draw( string id, out bool newVisual, out bool reset ) {
             newVisual = reset = false;
 
-            if( JobBars.Configuration.GaugeEnabled.Draw( $"Enabled{id}", Name, Enabled, out var newEnabled ) ) {
+            if( JobBars.Configuration.GaugeEnabled.Draw( $"启用{id}", Name, Enabled, out var newEnabled ) ) {
                 Enabled = newEnabled;
                 newVisual = true;
             }
 
-            if( JobBars.Configuration.GaugeHideInactive.Draw( $"Hide when inactive{id}", Name, HideWhenInactive, out var newHideWhenInactive ) ) {
+            if( JobBars.Configuration.GaugeHideInactive.Draw( $"非激活时隐藏{id}", Name, HideWhenInactive, out var newHideWhenInactive ) ) {
                 HideWhenInactive = newHideWhenInactive;
             }
 
-            if( JobBars.Configuration.GaugeIndividualScale.Draw( $"Scale{id}", Name, out var newScale ) ) {
+            if( JobBars.Configuration.GaugeIndividualScale.Draw( $"缩放{id}", Name, out var newScale ) ) {
                 Scale = Math.Max( 0.1f, newScale );
                 newVisual = true;
             }
 
             if( JobBars.Configuration.GaugePositionType == GaugePositionType.Split ) {
-                if( JobBars.Configuration.GaugeSplitPosition.Draw( $"Split position{id}", Name, out var newPosition ) ) {
+                if( JobBars.Configuration.GaugeSplitPosition.Draw( $"分离位置{id}", Name, out var newPosition ) ) {
                     SetSplitPosition( newPosition );
                     newVisual = true;
                 }
             }
 
-            if( JobBars.Configuration.GaugeOrder.Draw( $"Order{id}", Name, Order, out var newOrder ) ) {
+            if( JobBars.Configuration.GaugeOrder.Draw( $"顺序{id}", Name, Order, out var newOrder ) ) {
                 Order = newOrder;
                 newVisual = true;
             }
@@ -92,30 +92,30 @@ namespace JobBars.Gauges {
             DrawConfig( id, ref newVisual, ref reset );
         }
 
-        protected void DrawSoundEffect( string label = "Progress sound effect" ) {
-            if( ImGui.Button( "Test##SoundEffect" ) ) Helper.UiHelper.PlaySoundEffect( SoundEffect );
+        protected void DrawSoundEffect( string label = "进度音效" ) {
+            if( ImGui.Button( "测试##SoundEffect" ) ) Helper.UiHelper.PlaySoundEffect( SoundEffect );
             ImGui.SameLine();
 
             ImGui.SetNextItemWidth( 200f );
-            if( JobBars.Configuration.GaugeSoundEffect_2.Draw( $"{label} (0 = off)", Name, SoundEffect, out var newSoundEffect ) ) {
+            if( JobBars.Configuration.GaugeSoundEffect_2.Draw( $"{label} (0 = 关闭)", Name, SoundEffect, out var newSoundEffect ) ) {
                 SoundEffect = newSoundEffect;
             }
             ImGui.SameLine();
-            HelpMarker( "For macro sound effects, add 36. For example, <se.6> would be 6+36=42" );
+            HelpMarker( "对于宏音效，需要加36。例如，<se.6> 应该是 6+36=42" );
         }
 
         public void PlaySoundEffect() => Helper.UiHelper.PlaySoundEffect( SoundEffect );
 
         protected void DrawCompletionSoundEffect() {
-            if( ImGui.Button( "Test##CompletionSoundEffect" ) ) Helper.UiHelper.PlaySoundEffect( CompletionSoundEffect );
+            if( ImGui.Button( "测试##CompletionSoundEffect" ) ) Helper.UiHelper.PlaySoundEffect( CompletionSoundEffect );
             ImGui.SameLine();
 
             ImGui.SetNextItemWidth( 200f );
-            if( JobBars.Configuration.GaugeCompletionSoundEffect_2.Draw( $"Completion sound effect (0 = off)", Name, CompletionSoundEffect, out var newSoundEffect ) ) {
+            if( JobBars.Configuration.GaugeCompletionSoundEffect_2.Draw( $"完成音效 (0 = 关闭)", Name, CompletionSoundEffect, out var newSoundEffect ) ) {
                 CompletionSoundEffect = newSoundEffect;
             }
             ImGui.SameLine();
-            HelpMarker( "For macro sound effects, add 36. For example, <se.6> would be 6+36=42" );
+            HelpMarker( "对于宏音效，需要加36。例如，<se.6> 应该是 6+36=42" );
         }
 
         public void PlayCompletionSoundEffect() => Helper.UiHelper.PlaySoundEffect( CompletionSoundEffect );

@@ -1,5 +1,6 @@
 using Dalamud.Bindings.ImGui;
 using JobBars.Atk;
+using JobBars.Helper;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -118,10 +119,11 @@ namespace JobBars.Data {
 
         private bool DrawCombo( string id, T[] comboOptions, T currentValue, out T value ) {
             value = currentValue;
-            if( ImGui.BeginCombo( id, $"{currentValue}", ImGuiComboFlags.HeightLargest ) ) {
+            var displayText = currentValue is Enum e ? e.GetDescription() : $"{currentValue}";
+            if( ImGui.BeginCombo( id, displayText, ImGuiComboFlags.HeightLargest ) ) {
                 if( ShowSearch ) {
                     ImGui.SetNextItemWidth( ImGui.GetWindowContentRegionMax().X - ImGui.GetWindowContentRegionMin().X - 50 );
-                    ImGui.InputText( "Search##Combo", ref SearchInput, 256 );
+                    ImGui.InputText( "搜索##Combo", ref SearchInput, 256 );
                 }
 
                 if( ShowSearch ) ImGui.BeginChild( "Child##Combo", new Vector2( ImGui.GetWindowContentRegionMax().X - ImGui.GetWindowContentRegionMin().X, 200 ), true );
@@ -129,11 +131,12 @@ namespace JobBars.Data {
                 var idx = 0;
                 foreach( var option in comboOptions ) {
                     if( ShowSearch && !string.IsNullOrEmpty( SearchInput ) ) {
-                        var optionString = option.ToString();
+                        var optionString = option is Enum enumOpt ? enumOpt.GetDescription() : option.ToString();
                         if( !optionString.Contains( SearchInput, StringComparison.CurrentCultureIgnoreCase ) ) continue;
                     }
 
-                    if( ImGui.Selectable( $"{option}##Combo{idx}", option.Equals( currentValue ) ) ) {
+                    var selectText = option is Enum enumVal ? enumVal.GetDescription() : $"{option}";
+                    if( ImGui.Selectable( $"{selectText}##Combo{idx}", option.Equals( currentValue ) ) ) {
                         value = option;
 
                         if( ShowSearch ) ImGui.EndChild();
