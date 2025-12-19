@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Helper;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System.Numerics;
 
 namespace JobBars.Nodes.Gauge {

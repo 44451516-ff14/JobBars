@@ -1,7 +1,7 @@
 using JobBars.Atk;
 using JobBars.Data;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System.Collections.Generic;
 using System.Linq;
 

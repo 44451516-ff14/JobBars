@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Data;
 using JobBars.Helper;
 using KamiToolKit.Classes;
+using KamiToolKit;
 using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Cooldown {

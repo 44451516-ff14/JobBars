@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Atk;
 using KamiToolKit.Classes;
+using KamiToolKit;
 using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Gauge.Diamond {

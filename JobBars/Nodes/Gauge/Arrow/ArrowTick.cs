@@ -1,7 +1,7 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Atk;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 
 namespace JobBars.Nodes.Gauge.Arrow {
     public unsafe class ArrowTick : NodeBase<AtkResNode> {

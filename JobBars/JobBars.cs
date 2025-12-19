@@ -11,7 +11,6 @@ using JobBars.Gauges.Manager;
 using JobBars.Helper;
 using JobBars.Icons.Manager;
 using JobBars.Nodes.Builder;
-using KamiToolKit;
 using System;
 
 namespace JobBars {

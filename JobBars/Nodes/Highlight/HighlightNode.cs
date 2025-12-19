@@ -1,6 +1,6 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 
 namespace JobBars.Nodes.Highlight {
     public unsafe class HighlightNode : NodeBase<AtkResNode> {

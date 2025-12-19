@@ -2,9 +2,10 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Atk;
 using JobBars.Data;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System;
 using System.Collections.Generic;
+using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Gauge.Bar {
     public unsafe class BarNode : GaugeNode {

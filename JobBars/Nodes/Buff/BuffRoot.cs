@@ -1,8 +1,8 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
 using System.Collections.Generic;
 using System.Linq;
+using KamiToolKit;
 
 namespace JobBars.Nodes.Buff {
     public unsafe class BuffRoot : NodeBase<AtkResNode> {

@@ -3,7 +3,7 @@ using JobBars.Nodes.Gauge.Arrow;
 using JobBars.Nodes.Gauge.Bar;
 using JobBars.Nodes.Gauge.Diamond;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System.Collections.Generic;
 
 namespace JobBars.Nodes.Gauge {

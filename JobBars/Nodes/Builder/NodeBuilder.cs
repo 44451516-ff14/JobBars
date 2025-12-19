@@ -10,7 +10,7 @@ using JobBars.Nodes.Cursor;
 using JobBars.Nodes.Gauge;
 using JobBars.Nodes.Highlight;
 using KamiToolKit.Classes;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System.Collections.Generic;
 using System.Numerics;
 

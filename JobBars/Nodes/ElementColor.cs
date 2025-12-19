@@ -1,9 +1,10 @@
 using FFXIVClientStructs.FFXIV.Client.Graphics;
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using KamiToolKit;
 
 namespace JobBars.Atk {
     public struct ElementColor {
