@@ -7,8 +7,8 @@ using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Cooldown {
     public unsafe class CooldownNode : NodeBase<AtkResNode> {
-        public static readonly ushort WIDTH = 30;
-        public static readonly ushort HEIGHT = 30;
+        public static readonly ushort WIDTH = 40;
+        public static readonly ushort HEIGHT = 40;
 
         private readonly TextNode Text;
         private readonly SimpleImageNode Icon;
@@ -26,7 +26,7 @@ namespace JobBars.Nodes.Cooldown {
                 Size = new( WIDTH, HEIGHT ),
                 NodeFlags = NodeFlags.Visible,
                 ImageNodeFlags = ImageNodeFlags.AutoFit,
-                TextureSize = new( 44, 46 ),
+                TextureSize = new( 40, 40 ),
             };
             Icon.LoadIcon( 405 );
 
@@ -46,7 +46,7 @@ namespace JobBars.Nodes.Cooldown {
             Text = new TextNode() {
                 NodeId = JobBars.NodeId++,
                 Size = new( WIDTH, HEIGHT ),
-                FontSize = 21,
+                FontSize = 24,
                 LineSpacing = ( byte )HEIGHT,
                 AlignmentType = (AlignmentType)52,
                 TextColor = new( 1, 1, 1, 1 ),
@@ -80,7 +80,7 @@ namespace JobBars.Nodes.Cooldown {
         }
 
         public void SetText( string text ) {
-            Text.FontSize = text.Length > 2 ? ( byte )17 : ( byte )21;
+            Text.FontSize = text.Length > 2 ? ( byte )20 : ( byte )24;
             Text.String = text;
             Text.IsVisible = true;
         }
