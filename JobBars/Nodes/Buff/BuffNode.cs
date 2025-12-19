@@ -4,7 +4,6 @@ using JobBars.Data;
 using JobBars.Helper;
 using KamiToolKit;
 using KamiToolKit.Classes;
-using KamiToolKit;
 using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Buff {
@@ -66,12 +65,10 @@ namespace JobBars.Nodes.Buff {
                 Text = "",
             };
 
-            JobBars.NativeController.AttachToNode( [
-                Icon,
-                Overlay,
-                Border,
-                Text
-            ], this, NodePosition.AsLastChild );
+            Icon.AttachNode( this, NodePosition.AsLastChild );
+            Overlay.AttachNode( this, NodePosition.AsLastChild );
+            Border.AttachNode( this, NodePosition.AsLastChild );
+            Text.AttachNode( this, NodePosition.AsLastChild );
 
             Update();
         }
@@ -131,13 +128,13 @@ namespace JobBars.Nodes.Buff {
             color.SetColor( Border );
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Text.Dispose();
                 Overlay.Dispose();
                 Icon.Dispose();
                 Border.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

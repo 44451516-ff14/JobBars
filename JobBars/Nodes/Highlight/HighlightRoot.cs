@@ -15,20 +15,21 @@ namespace JobBars.Nodes.Highlight {
             Position = new( -12, 19 );
 
             for( var i = 0; i < 8; i++ ) {
-                Highlights.Add( new HighlightNode() );
-                Highlights[i].Position = new( 0, 40 * i );
+                var highlight = new HighlightNode();
+                Highlights.Add( highlight );
+                highlight.Position = new( 0, 40 * i );
+                highlight.AttachNode( this, NodePosition.AsLastChild );
             }
-            JobBars.NativeController.AttachToNode( Highlights.Select( x => ( NodeBase )x ).ToList(), this, NodePosition.AsLastChild );
         }
 
         public void HideAll() {
             foreach( var item in Highlights ) item.IsVisible = false;
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var item in Highlights ) item.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

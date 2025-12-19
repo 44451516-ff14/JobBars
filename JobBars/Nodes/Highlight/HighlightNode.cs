@@ -1,6 +1,7 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
 using KamiToolKit.Classes;
 using KamiToolKit;
+using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Highlight {
     public unsafe class HighlightNode : NodeBase<AtkResNode> {
@@ -23,15 +24,13 @@ namespace JobBars.Nodes.Highlight {
             };
             Highlight.LoadTexture( "ui/uld/PartyListTargetBase.tex" );
 
-            JobBars.NativeController.AttachToNode( [
-                Highlight
-            ], this, NodePosition.AsLastChild );
+            Highlight.AttachNode( this, NodePosition.AsLastChild );
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Highlight.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

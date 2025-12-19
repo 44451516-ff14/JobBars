@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Atk;
 using KamiToolKit.Classes;
 using KamiToolKit;
+using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Gauge.Arrow {
     public unsafe class ArrowTick : NodeBase<AtkResNode> {
@@ -45,14 +46,10 @@ namespace JobBars.Nodes.Gauge.Arrow {
             };
             Selected.LoadTexture( "ui/uld/JobHudSimple_StackB.tex", JobBars.Configuration.Use4K ? 2u : 1u );
 
-            JobBars.NativeController.AttachToNode( [
-                Selected,
-            ], SelectedContainer, NodePosition.AsLastChild );
+            Selected.AttachNode( SelectedContainer, NodePosition.AsLastChild );
 
-            JobBars.NativeController.AttachToNode( [
-                Background,
-                SelectedContainer,
-            ], this, NodePosition.AsLastChild );
+            Background.AttachNode( this, NodePosition.AsLastChild );
+            SelectedContainer.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void SetColor( ElementColor color ) {
@@ -62,12 +59,12 @@ namespace JobBars.Nodes.Gauge.Arrow {
 
         public void Tick( float percent ) => TickColor.SetColorPulse( Selected, percent );
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Background.Dispose();
                 SelectedContainer.Dispose();
                 Selected.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

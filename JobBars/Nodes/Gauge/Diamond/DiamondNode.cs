@@ -19,8 +19,8 @@ namespace JobBars.Nodes.Gauge.Diamond {
                     Position = new( 20 * idx, 0 )
                 };
                 Ticks.Add( tick );
+                tick.AttachNode( this, NodePosition.AsLastChild );
             }
-            JobBars.NativeController.AttachToNode( Ticks.Select( x => ( NodeBase )x ).ToList(), this, NodePosition.AsLastChild );
         }
 
         public void SetMaxValue( int value ) {
@@ -61,10 +61,10 @@ namespace JobBars.Nodes.Gauge.Diamond {
 
         public void Tick( float percent ) => Ticks.ForEach( t => t.Tick( percent ) );
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var tick in Ticks ) tick.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

@@ -17,8 +17,11 @@ namespace JobBars.Nodes.Cooldown {
             Position = JobBars.Configuration.CooldownPosition;
             NodeFlags = NodeFlags.Visible;
 
-            for( var i = 0; i < 8; i++ ) Rows.Add( new CooldownRow() );
-            JobBars.NativeController.AttachToNode( Rows.Select( x => ( NodeBase )x ).ToList(), this, NodePosition.AsLastChild );
+            for( var i = 0; i < 8; i++ ) {
+                var row = new CooldownRow();
+                Rows.Add( row );
+                row.AttachNode( this, NodePosition.AsLastChild );
+            }
 
             Update();
         }
@@ -29,10 +32,10 @@ namespace JobBars.Nodes.Cooldown {
 
         public void SetCooldownRowVisible( int idx, bool visible ) => Rows[idx].IsVisible = visible;
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var buff in Rows ) buff.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

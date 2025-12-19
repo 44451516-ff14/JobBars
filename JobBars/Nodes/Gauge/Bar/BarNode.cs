@@ -162,28 +162,20 @@ namespace JobBars.Nodes.Gauge.Bar {
             };
             TextBlur.LoadTexture( "ui/uld/JobHudNumBg.tex", JobBars.Configuration.Use4K ? 2u : 1u );
 
-            JobBars.NativeController.AttachToNode( [
-                BarSecondary,
-                BarMain,
-                ..Separators
-            ], BarContainer, NodePosition.AsLastChild );
+            BarSecondary.AttachNode( BarContainer, NodePosition.AsLastChild );
+            BarMain.AttachNode( BarContainer, NodePosition.AsLastChild );
+            foreach( var separator in Separators ) separator.AttachNode( BarContainer, NodePosition.AsLastChild );
 
-            JobBars.NativeController.AttachToNode( [
-                Background,
-                BarContainer,
-                Frame,
-                Indicator,
-            ], GaugeContainer, NodePosition.AsLastChild );
+            Background.AttachNode( GaugeContainer, NodePosition.AsLastChild );
+            BarContainer.AttachNode( GaugeContainer, NodePosition.AsLastChild );
+            Frame.AttachNode( GaugeContainer, NodePosition.AsLastChild );
+            Indicator.AttachNode( GaugeContainer, NodePosition.AsLastChild );
 
-            JobBars.NativeController.AttachToNode( [
-                TextBlur,
-                Text,
-            ], TextContainer, NodePosition.AsLastChild );
+            TextBlur.AttachNode( TextContainer, NodePosition.AsLastChild );
+            Text.AttachNode( TextContainer, NodePosition.AsLastChild );
 
-            JobBars.NativeController.AttachToNode( [
-                GaugeContainer,
-                TextContainer
-            ], this, NodePosition.AsLastChild );
+            GaugeContainer.AttachNode( this, NodePosition.AsLastChild );
+            TextContainer.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void SetText( string text ) {
@@ -319,7 +311,7 @@ namespace JobBars.Nodes.Gauge.Bar {
             foreach( var item in Separators ) item.IsVisible = false;
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 GaugeContainer.Dispose();
                 Background.Dispose();
@@ -332,7 +324,7 @@ namespace JobBars.Nodes.Gauge.Bar {
                 Text.Dispose();
                 TextBlur.Dispose();
                 foreach( var item in Separators ) item.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

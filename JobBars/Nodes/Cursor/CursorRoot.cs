@@ -2,6 +2,7 @@ using FFXIVClientStructs.FFXIV.Component.GUI;
 using JobBars.Atk;
 using KamiToolKit.Classes;
 using KamiToolKit;
+using KamiToolKit.Nodes;
 
 namespace JobBars.Nodes.Cursor {
     public unsafe class CursorRoot : NodeBase<AtkResNode> {
@@ -36,10 +37,8 @@ namespace JobBars.Nodes.Cursor {
 
             SetPartId( Outer, 79, ref StaticCircleOuter );
 
-            JobBars.NativeController.AttachToNode( [
-                Inner,
-                Outer
-            ], this, NodePosition.AsLastChild );
+            Inner.AttachNode( this, NodePosition.AsLastChild );
+            Outer.AttachNode( this, NodePosition.AsLastChild );
         }
 
         private static void SetPartId( ImageNode node, int partId, ref bool staticCircle ) {
@@ -106,11 +105,11 @@ namespace JobBars.Nodes.Cursor {
             Outer.AddColor = color.AddColor;
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Inner.Dispose();
                 Outer.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

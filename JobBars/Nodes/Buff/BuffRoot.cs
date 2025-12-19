@@ -15,8 +15,11 @@ namespace JobBars.Nodes.Buff {
             NodeID = JobBars.NodeId++;
             Size = new( 256, 100 );
 
-            for( var i = 0; i < MAX_BUFFS; i++ ) Buffs.Add( new BuffNode() );
-            JobBars.NativeController.AttachToNode( Buffs.Select( x => ( NodeBase )x ).ToList(), this, NodePosition.AsLastChild );
+            for( var i = 0; i < MAX_BUFFS; i++ ) {
+                var buff = new BuffNode();
+                Buffs.Add( buff );
+                buff.AttachNode( this, NodePosition.AsLastChild );
+            }
 
             Update();
         }
@@ -34,10 +37,10 @@ namespace JobBars.Nodes.Buff {
             foreach( var buff in Buffs ) buff.Update();
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var buff in Buffs ) buff.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

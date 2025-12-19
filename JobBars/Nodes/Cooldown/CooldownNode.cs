@@ -56,11 +56,9 @@ namespace JobBars.Nodes.Cooldown {
                 Text = "",
             };
 
-            JobBars.NativeController.AttachToNode( [
-                Icon,
-                Border,
-                Text
-            ], this, NodePosition.AsLastChild );
+            Icon.AttachNode( this, NodePosition.AsLastChild );
+            Border.AttachNode( this, NodePosition.AsLastChild );
+            Text.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void SetNoDash() {
@@ -107,12 +105,12 @@ namespace JobBars.Nodes.Cooldown {
             Icon.LoadIcon( UiHelper.GetIcon( action ) );
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Icon.Dispose();
                 Border.Dispose();
                 Text.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

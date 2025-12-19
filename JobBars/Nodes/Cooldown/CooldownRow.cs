@@ -19,14 +19,14 @@ namespace JobBars.Nodes.Cooldown {
                     Position = new( -( 5 + CooldownNode.WIDTH ) * idx, 0 )
                 };
                 Nodes.Add( node );
+                node.AttachNode( this, NodePosition.AsLastChild );
             }
-            JobBars.NativeController.AttachToNode( Nodes.Select( x => ( NodeBase )x ).ToList(), this, NodePosition.AsLastChild );
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var buff in Nodes ) buff.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

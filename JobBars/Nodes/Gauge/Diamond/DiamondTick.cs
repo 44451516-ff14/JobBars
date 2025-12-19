@@ -62,15 +62,11 @@ namespace JobBars.Nodes.Gauge.Diamond {
                 Text = "",
             };
 
-            JobBars.NativeController.AttachToNode( [
-                Selected,
-                Text
-            ], SelectedContainer, NodePosition.AsLastChild );
+            Selected.AttachNode( SelectedContainer, NodePosition.AsLastChild );
+            Text.AttachNode( SelectedContainer, NodePosition.AsLastChild );
 
-            JobBars.NativeController.AttachToNode( [
-                Background,
-                SelectedContainer,
-            ], this, NodePosition.AsLastChild );
+            Background.AttachNode( this, NodePosition.AsLastChild );
+            SelectedContainer.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void SetColor( ElementColor color ) {
@@ -80,13 +76,13 @@ namespace JobBars.Nodes.Gauge.Diamond {
 
         public void Tick( float percent ) => TickColor.SetColorPulse( Selected, percent );
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 Background.Dispose();
                 SelectedContainer.Dispose();
                 Selected.Dispose();
                 Text.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }

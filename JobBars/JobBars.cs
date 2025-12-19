@@ -22,7 +22,6 @@ namespace JobBars {
         public static CooldownManager CooldownManager { get; private set; }
         public static CursorManager CursorManager { get; private set; }
         public static IconManager IconManager { get; private set; }
-        public static NativeController NativeController { get; private set; }
 
         public static JobIds CurrentJob { get; private set; } = JobIds.OTHER;
 
@@ -33,8 +32,6 @@ namespace JobBars {
 
         public JobBars( IDalamudPluginInterface pluginInterface ) {
             pluginInterface.Create<Dalamud>();
-
-            NativeController = new( pluginInterface );
 
             UiHelper.Setup();
             ColorConstants.SetupColors();
@@ -97,7 +94,6 @@ namespace JobBars {
 
             Animation.Dispose();
             NodeBuilder?.Dispose();
-            NativeController?.Dispose();
         }
 
         private void OnFrameworkUpdate( IFramework framework ) {

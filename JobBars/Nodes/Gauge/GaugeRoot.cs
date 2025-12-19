@@ -24,12 +24,9 @@ namespace JobBars.Nodes.Gauge {
                 Diamonds.Add( new DiamondNode() );
             }
 
-            var allGauges = new List<NodeBase>();
-            allGauges.AddRange( Bars );
-            allGauges.AddRange( Arrows );
-            allGauges.AddRange( Diamonds );
-
-            JobBars.NativeController.AttachToNode( allGauges, this, NodePosition.AsLastChild );
+            foreach( var bar in Bars ) bar.AttachNode( this, NodePosition.AsLastChild );
+            foreach( var arrow in Arrows ) arrow.AttachNode( this, NodePosition.AsLastChild );
+            foreach( var diamond in Diamonds ) diamond.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void HideAll() {
@@ -38,12 +35,12 @@ namespace JobBars.Nodes.Gauge {
             foreach( var item in Diamonds ) item.IsVisible = false;
         }
 
-        protected override void Dispose( bool disposing ) {
+        protected override void Dispose( bool disposing, bool isNativeDestructor ) {
             if( disposing ) {
                 foreach( var item in Bars ) item.Dispose();
                 foreach( var item in Arrows ) item.Dispose();
                 foreach( var item in Diamonds ) item.Dispose();
-                base.Dispose( disposing );
+                base.Dispose( disposing, isNativeDestructor );
             }
         }
     }
