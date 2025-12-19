@@ -56,14 +56,29 @@ namespace JobBars.Data {
                 var idx = 0;
                 foreach( var item in Searched ) {
                     if( idx < preItems || idx > ( preItems + showItems ) ) { idx++; continue; }
-                    if( ImGui.Selectable( $"{item.Name}{Id}{item.Data.Id}", item.Data == SearchSelected.Data ) ) {
-                        SearchSelected = item;
+                    
+                    // 显示图标
+                    IDalamudTextureWrap itemIcon = null;
+                    try {
+                        itemIcon = Dalamud.TextureProvider.GetFromGameIcon( item.Icon > 0 ? item.Icon : 0 ).GetWrapOrDefault();
+                    }
+                    catch( Exception ) {
                         try {
-                            Icon = Dalamud.TextureProvider.GetFromGameIcon( item.Icon > 0 ? item.Icon : 0 ).GetWrapOrDefault();
+                            itemIcon = Dalamud.TextureProvider.GetFromGameIcon( 0 ).GetWrapOrDefault();
                         }
                         catch( Exception ) {
-                            Icon = Dalamud.TextureProvider.GetFromGameIcon( 0 ).GetWrapOrDefault();
+                            // 忽略错误，继续显示文本
                         }
+                    }
+                    
+                    if( itemIcon != null ) {
+                        ImGui.Image( itemIcon.Handle, new Vector2( 20, 20 ) );
+                        ImGui.SameLine();
+                    }
+                    
+                    if( ImGui.Selectable( $"{item.Name}{Id}{item.Data.Id}", item.Data == SearchSelected.Data ) ) {
+                        SearchSelected = item;
+                        Icon = itemIcon;
                     }
                     idx++;
                 }
