@@ -94,11 +94,11 @@ namespace JobBars.Data {
             ImGui.SetCursorPosY( ImGui.GetCursorPosY() + 5 );
 
             if( ImGui.BeginTabBar( $"{Id}-TabBar" ) ) {
-                if( ImGui.BeginTabItem( $"Jobs{Id}" ) ) {
+                if( ImGui.BeginTabItem( $"职业{Id}" ) ) {
                     DrawJobs();
                     ImGui.EndTabItem();
                 }
-                if( ImGui.BeginTabItem( $"Settings{Id}" ) ) {
+                if( ImGui.BeginTabItem( $"设置{Id}" ) ) {
                     ImGui.SetCursorPosY( ImGui.GetCursorPosY() + 5 );
 
                     ImGui.BeginChild( $"Settings-Child{Id}" );

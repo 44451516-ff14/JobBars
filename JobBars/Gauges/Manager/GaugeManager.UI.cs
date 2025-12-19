@@ -52,7 +52,7 @@ namespace JobBars.Gauges.Manager {
                     }
                 }
 
-                if( ImGui.InputFloat( "缩放" + manager.Id, ref JobBars.Configuration.GaugeScale ) ) {
+                if( ImGui.SliderFloat( "缩放" + manager.Id, ref JobBars.Configuration.GaugeScale, 0.1f, 2.0f ) ) {
                     manager.UpdatePositionScale();
                     JobBars.Configuration.Save();
                 }

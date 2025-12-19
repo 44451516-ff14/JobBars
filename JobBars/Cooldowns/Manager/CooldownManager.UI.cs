@@ -11,7 +11,7 @@ namespace JobBars.Cooldowns.Manager {
                     manager.ResetUi();
                 }
 
-                if( ImGui.InputFloat( "缩放" + manager.Id, ref JobBars.Configuration.CooldownScale ) ) {
+                if( ImGui.SliderFloat( "缩放" + manager.Id, ref JobBars.Configuration.CooldownScale, 0.1f, 2.0f ) ) {
                     UpdatePositionScale();
                     JobBars.Configuration.Save();
                 }

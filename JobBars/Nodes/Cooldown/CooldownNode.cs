@@ -93,7 +93,7 @@ namespace JobBars.Nodes.Cooldown {
         }
 
         public void SetOffCd() {
-            Icon.MultiplyColor = new( 100f / 255f, 100f / 255f, 100f / 255f );
+            Icon.MultiplyColor = new( 1.0f, 1.0f, 1.0f );
             Color = Color with {
                 W = 1f
             };

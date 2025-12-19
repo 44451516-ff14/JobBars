@@ -33,7 +33,7 @@ namespace JobBars.Buffs.Manager {
                     JobBars.NodeBuilder.BuffRoot.Update();
                 }
 
-                if( ImGui.InputFloat( "缩放" + manager.Id, ref JobBars.Configuration.BuffScale ) ) {
+                if( ImGui.SliderFloat( "缩放" + manager.Id, ref JobBars.Configuration.BuffScale, 0.1f, 2.0f ) ) {
                     UpdatePositionScale();
                     JobBars.Configuration.Save();
                 }

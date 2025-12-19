@@ -33,8 +33,8 @@ namespace JobBars.Cursors.Manager {
                 }
             }
 
-            if( ImGui.InputFloat( "内圈缩放" + Id, ref JobBars.Configuration.CursorInnerScale ) ) JobBars.Configuration.Save();
-            if( ImGui.InputFloat( "外圈缩放" + Id, ref JobBars.Configuration.CursorOuterScale ) ) JobBars.Configuration.Save();
+            if( ImGui.SliderFloat( "内圈缩放" + Id, ref JobBars.Configuration.CursorInnerScale, 0.1f, 2.0f ) ) JobBars.Configuration.Save();
+            if( ImGui.SliderFloat( "外圈缩放" + Id, ref JobBars.Configuration.CursorOuterScale, 0.1f, 2.0f ) ) JobBars.Configuration.Save();
 
             if( Configuration.DrawColor( "内圈颜色", InnerColor, out var newColorInner ) ) {
                 InnerColor = newColorInner;
