@@ -1,5 +1,5 @@
 using FFXIVClientStructs.FFXIV.Component.GUI;
-using KamiToolKit.Nodes;
+using KamiToolKit;
 
 namespace JobBars.Nodes {
     public class ResNode : NodeBase<AtkResNode> {
