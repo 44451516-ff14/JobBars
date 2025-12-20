@@ -54,17 +54,36 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.PLD, CursorType.None, CursorType.GCD );
 
         public static CooldownConfig[] Cooldowns => [
-            new CooldownConfig(UiHelper.Localize(ActionIds.HallowedGround), new CooldownProps {
-                Icon = ActionIds.HallowedGround,
+         
+            new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
+                Icon = ActionIds.铁壁,
+                Duration = 20,
+                CD = 90,
+                Triggers = [new Item(ActionIds.铁壁)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.Bulwark), new CooldownProps {
+                Icon = ActionIds.Bulwark,
+                Duration = 10,
+                CD = 90,
+                Triggers = [new Item(ActionIds.Bulwark)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.预警), new CooldownProps {
+                Icon = ActionIds.预警,
+                Duration = 15,
+                CD = 120,
+                Triggers = [new Item(ActionIds.预警)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.神圣领域), new CooldownProps {
+                Icon = ActionIds.神圣领域,
                 Duration = 10,
                 CD = 420,
-                Triggers = [new Item(ActionIds.HallowedGround)]
+                Triggers = [new Item(ActionIds.神圣领域)]
             }),
-            new CooldownConfig($"{UiHelper.Localize(ActionIds.Reprisal)} ({UiHelper.Localize(JobIds.PLD)})", new CooldownProps {
-                Icon = ActionIds.Reprisal,
+            new CooldownConfig(UiHelper.Localize(ActionIds.雪仇), new CooldownProps {
+                Icon = ActionIds.雪仇,
                 Duration = 15,
                 CD = 60,
-                Triggers = [new Item(ActionIds.Reprisal)]
+                Triggers = [new Item(ActionIds.雪仇)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.DivineVeil), new CooldownProps {
                 Icon = ActionIds.DivineVeil,
@@ -99,9 +118,9 @@ namespace JobBars.Jobs {
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.GoringBladeReady), Duration = 30 }
                 ]
             }),
-            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.Rampart)} ({UiHelper.Localize(JobIds.PLD)})", new IconBuffProps {
+            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.铁壁)} ({UiHelper.Localize(JobIds.PLD)})", new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.Rampart],
+                Icons = [ActionIds.铁壁],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.Rampart), Duration = 20 }
                 ]
@@ -109,7 +128,7 @@ namespace JobBars.Jobs {
             new IconBuffReplacer(UiHelper.Localize(BuffIds.Guardian), new IconBuffProps {
                 IconType = IconActionType.Buff,
                 Icons = [
-                    ActionIds.Sentinel,
+                    ActionIds.预警,
                     ActionIds.Guardian
                 ],
                 Triggers = [
@@ -133,7 +152,7 @@ namespace JobBars.Jobs {
             }),
             new IconBuffReplacer(UiHelper.Localize(BuffIds.HallowedGround), new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.HallowedGround],
+                Icons = [ActionIds.神圣领域],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.HallowedGround), Duration = 10 }
                 ]

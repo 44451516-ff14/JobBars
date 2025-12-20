@@ -33,15 +33,35 @@ namespace JobBars.Cooldowns
             Config = config;
         }
 
+        public static List< uint > AdjustedActionList = new()
+        {
+            ( uint )ActionIds.预警, 
+            ( uint )ActionIds.圣盾阵, 
+            ( uint )ActionIds.星云, 
+            ( uint )ActionIds.暗影墙, 
+            ( uint )ActionIds.石之心,
+            ( uint )ActionIds.自生
+        };
+
         public void ProcessAction( Item action )
         {
             foreach( var configTrigger in Config.Triggers )
             {
                 var trigger = configTrigger;
-                var adjustedAction = UiHelper.GetAdjustedAction(trigger.Id);
-                if( adjustedAction == action.Id )
+                if( AdjustedActionList.Contains( trigger.Id ) )
                 {
-                    SetActive( action );
+                    var adjustedAction = UiHelper.GetAdjustedAction( trigger.Id );
+                    if( adjustedAction == action.Id )
+                    {
+                        SetActive( action );
+                    }
+                }
+                else
+                {
+                    if( trigger.Id == action.Id )
+                    {
+                        SetActive( action );
+                    }
                 }
             }
         }

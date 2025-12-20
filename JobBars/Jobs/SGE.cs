@@ -28,6 +28,30 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.SGE, CursorType.None, CursorType.CastTime );
 
         public static CooldownConfig[] Cooldowns => [
+            
+            new CooldownConfig(UiHelper.Localize(ActionIds.混合), new CooldownProps {
+                Icon = ActionIds.混合,
+                CD = 60,
+                Triggers = [new Item(ActionIds.混合 )]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.拯救), new CooldownProps {
+                Icon = ActionIds.拯救,
+                CD = 60,
+                Triggers = [new Item(ActionIds.拯救)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.自生), new CooldownProps {
+                Icon = ActionIds.自生,
+                CD = 60,
+                Triggers = [new Item(ActionIds.自生)]
+            }),
+            
+            new CooldownConfig(UiHelper.Localize(ActionIds.活化), new CooldownProps {
+                Icon = ActionIds.活化,
+                CD = 90,
+                Triggers = [new Item(ActionIds.活化)]
+            }),
+
+            
             new CooldownConfig(UiHelper.Localize(ActionIds.Philosophia), new CooldownProps {
                 Icon = ActionIds.Philosophia,
                 CD = 180,
@@ -55,6 +79,11 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.Swiftcast,
                 CD = 40,
                 Triggers = [new Item(ActionIds.Swiftcast)]
+            }),
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.坚角清汁)} ({UiHelper.Localize(JobIds.SGE)})", new CooldownProps {
+                Icon = ActionIds.坚角清汁,
+                CD = 30,
+                Triggers = [new Item(ActionIds.坚角清汁)]
             })
         ];
 

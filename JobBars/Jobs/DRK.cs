@@ -49,17 +49,42 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.DRK, CursorType.None, CursorType.GCD );
 
         public static CooldownConfig[] Cooldowns => [
+            new CooldownConfig(UiHelper.Localize(ActionIds.TheBlackestNight), new CooldownProps {
+                Icon = ActionIds.TheBlackestNight,
+                Duration = 7,
+                CD = 15,
+                Triggers = [new Item(ActionIds.TheBlackestNight)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.DarkMind), new CooldownProps {
+                Icon = ActionIds.DarkMind,
+                Duration = 10,
+                CD = 60,
+                Triggers = [new Item(ActionIds.DarkMind)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.DarkMind), new CooldownProps {
+                Icon = ActionIds.铁壁,
+                Duration = 20,
+                CD = 90,
+                Triggers = [new Item(ActionIds.铁壁)]
+            }),
+        
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.暗影墙)} ({UiHelper.Localize(JobIds.DRK)})", new CooldownProps {
+                Icon = ActionIds.暗影墙,
+                Duration = 15,
+                CD = 120,
+                Triggers = [new Item(ActionIds.暗影墙)]
+            }),
             new CooldownConfig(UiHelper.Localize(ActionIds.LivingDead), new CooldownProps {
                 Icon = ActionIds.LivingDead,
                 Duration = 10,
                 CD = 300,
                 Triggers = [new Item(BuffIds.LivingDead)]
             }),
-            new CooldownConfig($"{UiHelper.Localize(ActionIds.Reprisal)} ({UiHelper.Localize(JobIds.DRK)})", new CooldownProps {
-                Icon = ActionIds.Reprisal,
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.雪仇)} ({UiHelper.Localize(JobIds.DRK)})", new CooldownProps {
+                Icon = ActionIds.雪仇,
                 Duration = 15,
                 CD = 60,
-                Triggers = [new Item(ActionIds.Reprisal)]
+                Triggers = [new Item(ActionIds.雪仇)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.DarkMissionary), new CooldownProps {
                 Icon = ActionIds.DarkMissionary,
@@ -67,18 +92,13 @@ namespace JobBars.Jobs {
                 CD = 90,
                 Triggers = [new Item(ActionIds.DarkMissionary)]
             }),
-            new CooldownConfig(UiHelper.Localize(ActionIds.TheBlackestNight), new CooldownProps {
-                Icon = ActionIds.TheBlackestNight,
-                Duration = 7,
-                CD = 15,
-                Triggers = [new Item(ActionIds.TheBlackestNight)]
-            })
+           
         ];
 
         public static IconReplacer[] Icons => new[] {
-            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.Rampart)} ({UiHelper.Localize(JobIds.DRK)})", new IconBuffProps {
+            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.铁壁)} ({UiHelper.Localize(JobIds.DRK)})", new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.Rampart],
+                Icons = [ActionIds.铁壁],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.Rampart), Duration = 20 }
                 ]
@@ -86,7 +106,7 @@ namespace JobBars.Jobs {
             new IconBuffReplacer(UiHelper.Localize(BuffIds.ShadowedVigil), new IconBuffProps {
                 IconType = IconActionType.Buff,
                 Icons = [
-                    ActionIds.ShadowWall,
+                    ActionIds.暗影墙,
                     ActionIds.ShadowedVigil
                 ],
                 Triggers = [

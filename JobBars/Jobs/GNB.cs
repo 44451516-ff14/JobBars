@@ -26,23 +26,47 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.GNB, CursorType.None, CursorType.GCD );
 
         public static CooldownConfig[] Cooldowns => [
-            new CooldownConfig(UiHelper.Localize(ActionIds.Superbolide), new CooldownProps {
-                Icon = ActionIds.Superbolide,
+            new CooldownConfig(UiHelper.Localize(ActionIds.石之心), new CooldownProps {
+                Icon = ActionIds.石之心,
+                Duration = 7,
+                CD = 25,
+                Triggers = [new Item(ActionIds.石之心)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
+                Icon = ActionIds.铁壁,
+                Duration = 20,
+                CD = 90,
+                Triggers = [new Item(ActionIds.铁壁)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.伪装), new CooldownProps {
+                Icon = ActionIds.伪装,
+                Duration = 20,
+                CD = 90,
+                Triggers = [new Item(ActionIds.伪装)]
+            }),
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.星云)} ({UiHelper.Localize(JobIds.GNB)})", new CooldownProps {
+                Icon = ActionIds.星云,
+                Duration = 15,
+                CD = 120,
+                Triggers = [new Item(ActionIds.星云)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.超火流星), new CooldownProps {
+                Icon = ActionIds.超火流星,
                 Duration = 10,
                 CD = 360,
-                Triggers = [new Item(ActionIds.Superbolide)]
+                Triggers = [new Item(ActionIds.超火流星)]
             }),
-            new CooldownConfig($"{UiHelper.Localize(ActionIds.Reprisal)} ({UiHelper.Localize(JobIds.GNB)})", new CooldownProps {
-                Icon = ActionIds.Reprisal,
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.雪仇)} ({UiHelper.Localize(JobIds.GNB)})", new CooldownProps {
+                Icon = ActionIds.雪仇,
                 Duration = 15,
                 CD = 60,
-                Triggers = [new Item(ActionIds.Reprisal)]
+                Triggers = [new Item(ActionIds.雪仇)]
             }),
-            new CooldownConfig(UiHelper.Localize(ActionIds.HeartOfLight), new CooldownProps {
-                Icon = ActionIds.HeartOfLight,
+            new CooldownConfig(UiHelper.Localize(ActionIds.光之心), new CooldownProps {
+                Icon = ActionIds.光之心,
                 Duration = 15,
                 CD = 90,
-                Triggers = [new Item(ActionIds.HeartOfLight)]
+                Triggers = [new Item(ActionIds.光之心)]
             })
         ];
 
@@ -65,9 +89,9 @@ namespace JobBars.Jobs {
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.ReadyToBreak), Duration = 30 }
                 ]
             }),
-            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.Rampart)} ({UiHelper.Localize(JobIds.GNB)})", new IconBuffProps {
+            new IconBuffReplacer($"{UiHelper.Localize(ActionIds.铁壁)} ({UiHelper.Localize(JobIds.GNB)})", new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.Rampart],
+                Icons = [ActionIds.铁壁],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.Rampart), Duration = 20 }
                 ]
@@ -75,7 +99,7 @@ namespace JobBars.Jobs {
             new IconBuffReplacer(UiHelper.Localize(BuffIds.GreatNebula), new IconBuffProps {
                 IconType = IconActionType.Buff,
                 Icons = [
-                    ActionIds.Nebula,
+                    ActionIds.星云,
                     ActionIds.GreatNebula
                 ],
                 Triggers = [
@@ -85,7 +109,7 @@ namespace JobBars.Jobs {
             }),
             new IconBuffReplacer(UiHelper.Localize(BuffIds.Camouflage), new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.Camouflage],
+                Icons = [ActionIds.伪装],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.Camouflage), Duration = 20 }
                 ]
@@ -99,7 +123,7 @@ namespace JobBars.Jobs {
             }),
             new IconBuffReplacer(UiHelper.Localize(BuffIds.Superbolide), new IconBuffProps {
                 IconType = IconActionType.Buff,
-                Icons = [ActionIds.Superbolide],
+                Icons = [ActionIds.超火流星],
                 Triggers = [
                     new IconBuffTriggerStruct { Trigger = new Item(BuffIds.Superbolide), Duration = 10 }
                 ]
@@ -108,7 +132,7 @@ namespace JobBars.Jobs {
                 IconType = IconActionType.Buff,
                 Icons =
                 [
-                    ActionIds.HeartOfStone,
+                    ActionIds.石之心,
                     ActionIds.HeartOfCorundum
                 ],
                 Triggers = [

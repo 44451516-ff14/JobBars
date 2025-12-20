@@ -2,8 +2,8 @@ namespace JobBars.Data {
     public enum ActionIds : uint {
 
         // DRK =========
-        Rampart = 7531, // All tanks
-        Reprisal = 7535, // All tanks
+        铁壁 = 7531, // All tanks
+        雪仇 = 7535, // All tanks
         ArmsLength = 7548, // All tanks
         DarkMissionary = 16471,
         LivingDead = 3638,
@@ -11,7 +11,7 @@ namespace JobBars.Data {
         LivingShadow = 0x4058,
         TheBlackestNight = 7393,
         BloodWeapon = 3625,
-        ShadowWall = 3636,
+        暗影墙 = 3636,
         DarkMind = 3634,
         ShadowedVigil = 36927,
 
@@ -38,21 +38,22 @@ namespace JobBars.Data {
         Atonement = 0x404C,
         TotalEclipse = 0x1CD5,
         Prominence = 0x4049,
-        HallowedGround = 30,
+        神圣领域 = 30,
         DivineVeil = 3540,
         PassageOfArms = 7385,
         FightOrFlight = 20,
-        Sentinel = 17,
+        预警 = 17,
         Bulwark = 22,
         Guardian = 36920,
+        圣盾阵 = 3542,
 
         // GNB ===========
         NoMercy = 16138,
-        HeartOfLight = 16160,
-        Superbolide = 16152,
-        Nebula = 16148,
-        Camouflage = 16140,
-        HeartOfStone = 16161,
+        光之心 = 16160,
+        超火流星 = 16152,
+        星云 = 16148,
+        伪装 = 16140,
+        石之心 = 16161,
         HeartOfCorundum = 25758,
         GreatNebula = 36935,
         SonicBreak = 16153,
@@ -77,6 +78,9 @@ namespace JobBars.Data {
         Benediction = 140,
         PresenceOfMind = 136,
         LilyBell = 25862,
+        全大赦 = 7433,
+        神爱抚 = 37011,
+        法令 = 3571,
 
         // AST ===========
         Combust1 = 3599,
@@ -112,6 +116,11 @@ namespace JobBars.Data {
         Panhaima = 24311,
         EukrasianDyskrasia = 37032,
         Philosophia = 37035,
+        混合 = 24317,
+        拯救 = 24294,
+        自生 = 24288,
+        活化 = 24300,
+        坚角清汁 = 24298,
 
         // MNK ===========
         TrueNorth = 7546, // All melee
@@ -227,4 +236,5 @@ namespace JobBars.Data {
         CondensedLibra = 18321,
         AngelWhisper = 18317
     }
+
 }
