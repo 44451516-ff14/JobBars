@@ -63,7 +63,12 @@ namespace JobBars.Jobs {
                 Duration = 15,
                 CD = 90,
                 Triggers = [new Item(ActionIds.Addle)]
-            })
+            }),
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.魔罩)} ({UiHelper.Localize(JobIds.BLM)})", new CooldownProps {
+                Icon = ActionIds.魔罩,
+                CD = 120,
+                Triggers = [new Item(ActionIds.魔罩)]
+            }),
         ];
 
         public static IconReplacer[] Icons => new[] {

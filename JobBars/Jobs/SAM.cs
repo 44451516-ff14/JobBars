@@ -83,6 +83,16 @@ namespace JobBars.Jobs {
                 Duration = 15,
                 CD = 90,
                 Triggers = [new Item(ActionIds.Feint)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.内丹), new CooldownProps {
+                Icon = ActionIds.内丹,
+                CD = 120,
+                Triggers = [new Item(ActionIds.内丹)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.浴血), new CooldownProps {
+                Icon = ActionIds.浴血,
+                CD = 90,
+                Triggers = [new Item(ActionIds.浴血)]
             })
         ];
 

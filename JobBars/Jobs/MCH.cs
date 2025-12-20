@@ -86,6 +86,11 @@ namespace JobBars.Jobs {
                 Duration = 10,
                 CD = 120,
                 Triggers = [new Item(ActionIds.Dismantle)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.内丹), new CooldownProps {
+                Icon = ActionIds.内丹,
+                CD = 120,
+                Triggers = [new Item(ActionIds.内丹)]
             })
         ];
 

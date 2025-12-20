@@ -5,6 +5,8 @@ namespace JobBars.Data {
         铁壁 = 7531, // All tanks
         雪仇 = 7535, // All tanks
         ArmsLength = 7548, // All tanks
+        内丹 = 7541, // All tanks
+        浴血 = 7542, // All tanks
         DarkMissionary = 16471,
         LivingDead = 3638,
         Delirium = 7390,
@@ -132,6 +134,7 @@ namespace JobBars.Data {
         Demolish = 66,
         Mantra = 65,
         FiresReply = 36950,
+        金刚极意 = 7394,
 
         // DRG ===========
         DragonSight = 7398,
@@ -148,6 +151,7 @@ namespace JobBars.Data {
         Mug = 2248,
         KunaisBane = 36958,
         Dokumori = 36957,
+        残影 = 2241,
 
         // VPR ===========
         RattlingCoil = 39189,
@@ -204,6 +208,7 @@ namespace JobBars.Data {
         Sharpcast = 3574,
         HighThunder = 36986,
         HighThunder2 = 36987,
+        魔罩 = 157,
 
         // SMN ===========
         SummonBahamut = 7427,

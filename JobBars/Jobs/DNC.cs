@@ -71,6 +71,11 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.CuringWaltz,
                 CD = 60,
                 Triggers = [new Item(ActionIds.CuringWaltz)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.内丹), new CooldownProps {
+                Icon = ActionIds.内丹,
+                CD = 120,
+                Triggers = [new Item(ActionIds.内丹)]
             })
         ];
 
