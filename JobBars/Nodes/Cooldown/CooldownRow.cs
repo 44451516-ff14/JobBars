@@ -8,7 +8,7 @@ namespace JobBars.Nodes.Cooldown {
     public unsafe class CooldownRow : NodeBase<AtkResNode> {
         public readonly List<CooldownNode> Nodes = [];
 
-        public static readonly int MAX_ITEMS = 10;
+        public static readonly int MAX_ITEMS = 20;
 
         public CooldownRow() : base( NodeType.Res ) {
             NodeId = JobBars.NodeId++;
