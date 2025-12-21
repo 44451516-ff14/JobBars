@@ -60,7 +60,7 @@ namespace JobBars.Data {
         PresenceOfMind = 157,
         LilyBell = 2709,
         SacredSight = 3879,
-
+ 
         // AST =========
         TheBalance = 3887,
         TheBole = 0x75b,

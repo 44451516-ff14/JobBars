@@ -16,6 +16,7 @@ namespace JobBars.Data {
         暗影墙 = 3636,
         DarkMind = 3634,
         ShadowedVigil = 36927,
+        献奉 = 25754,
 
         // WAR ==========
         InnerRelease = 7389,
@@ -48,6 +49,7 @@ namespace JobBars.Data {
         Bulwark = 22,
         Guardian = 36920,
         圣盾阵 = 3542,
+    
 
         // GNB ===========
         NoMercy = 16138,
@@ -83,7 +85,10 @@ namespace JobBars.Data {
         全大赦 = 7433,
         神爱抚 = 37011,
         法令 = 3571,
-
+        水流幕 = 25861,
+        神祝祷 = 7432,
+        神名 = 3570,
+        
         // AST ===========
         Combust1 = 3599,
         Combust2 = 3608,

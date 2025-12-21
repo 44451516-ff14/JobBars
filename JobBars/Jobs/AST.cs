@@ -82,7 +82,7 @@ namespace JobBars.Jobs
             {
                 Icon = ActionIds.天星交错,
                 CD = 30,
-                MaxCharges = 3,
+                MaxCharges = 2,
                 Triggers = [new Item( ActionIds.天星交错 )]
             } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.CollectiveUnconscious ), new CooldownProps

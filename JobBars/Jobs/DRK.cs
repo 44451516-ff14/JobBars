@@ -49,6 +49,12 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.DRK, CursorType.None, CursorType.GCD );
 
         public static CooldownConfig[] Cooldowns => [
+            new CooldownConfig(UiHelper.Localize(ActionIds.献奉), new CooldownProps {
+                Icon = ActionIds.献奉,
+                CD = 60,
+                MaxCharges = 2,
+                Triggers = [new Item(ActionIds.献奉)]
+            }),
             new CooldownConfig(UiHelper.Localize(ActionIds.TheBlackestNight), new CooldownProps {
                 Icon = ActionIds.TheBlackestNight,
                 Duration = 7,

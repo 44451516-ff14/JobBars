@@ -18,7 +18,7 @@ namespace JobBars.Cooldowns
             OffCD
         }
 
-        private readonly CooldownConfig Config;
+        private readonly CooldownConfig _CooldownConfig;
 
         private TrackerState State = TrackerState.None;
         private DateTime LastActiveTime;
@@ -27,11 +27,11 @@ namespace JobBars.Cooldowns
         private int CurrentCharges = 0; // 当前充能次数
 
         public TrackerState CurrentState => State;
-        public ActionIds Icon => Config.Icon;
+        public ActionIds Icon => _CooldownConfig.Icon;
 
-        public CooldownTracker( CooldownConfig config )
+        public CooldownTracker( CooldownConfig cooldownConfig )
         {
-            Config = config;
+            _CooldownConfig = cooldownConfig;
         }
 
         public static List< uint > AdjustedActionList = new()
@@ -46,7 +46,7 @@ namespace JobBars.Cooldowns
 
         public void ProcessAction( Item action )
         {
-            foreach( var configTrigger in Config.Triggers )
+            foreach( var configTrigger in _CooldownConfig.Triggers )
             {
                 var trigger = configTrigger;
                 if( AdjustedActionList.Contains( trigger.Id ) )
@@ -69,7 +69,7 @@ namespace JobBars.Cooldowns
 
         private void SetActive( Item trigger )
         {
-            State = Config.Duration == 0 ? TrackerState.OnCD : TrackerState.Running;
+            State = _CooldownConfig.Duration == 0 ? TrackerState.OnCD : TrackerState.Running;
             LastActiveTime = DateTime.Now;
             LastActiveTrigger = trigger;
         }
@@ -77,9 +77,10 @@ namespace JobBars.Cooldowns
         public void Tick( Dictionary< Item, Status > buffDict )
         {
             // 计算充能次数（如果技能有充能）
-            if( Config.MaxCharges > 1 )
+            if( _CooldownConfig.MaxCharges > 1 )
             {
-                CurrentCharges = CalculateCurrentCharges();
+                var calculateCurrentCharges = CalculateCurrentCharges();
+                CurrentCharges = calculateCurrentCharges;
             }
             else
             {
@@ -87,12 +88,12 @@ namespace JobBars.Cooldowns
             }
 
             if( State != TrackerState.Running &&
-                UiHelper.CheckForTriggers( buffDict, Config.Triggers, out var trigger ) ) SetActive( trigger );
+                UiHelper.CheckForTriggers( buffDict, _CooldownConfig.Triggers, out var trigger ) ) SetActive( trigger );
 
             if( State == TrackerState.Running )
             {
                 TimeLeft = UiHelper.TimeLeft(
-                    JobBars.Configuration.CooldownsHideActiveBuffDuration ? 0 : Config.Duration, buffDict,
+                    JobBars.Configuration.CooldownsHideActiveBuffDuration ? 0 : _CooldownConfig.Duration, buffDict,
                     LastActiveTrigger, LastActiveTime );
                 if( TimeLeft <= 0 )
                 {
@@ -103,9 +104,9 @@ namespace JobBars.Cooldowns
             else if( State == TrackerState.OnCD )
             {
                 // 对于充能技能，使用实时计算的充能次数来判断状态
-                if( Config.MaxCharges > 1 )
+                if( _CooldownConfig.MaxCharges > 1 )
                 {
-                    if( CurrentCharges >= Config.MaxCharges )
+                    if( CurrentCharges >= _CooldownConfig.MaxCharges )
                     {
                         // 充能已满，切换到 OffCD 状态
                         State = TrackerState.OffCD;
@@ -116,7 +117,7 @@ namespace JobBars.Cooldowns
                         // 充能未满，保持在 OnCD 状态，计算到下一次充能完成的时间
                         var recastActive = false;
                         float timeElapsed = 0;
-                        foreach( var triggerItem in Config.Triggers )
+                        foreach( var triggerItem in _CooldownConfig.Triggers )
                         {
                             if( triggerItem.Type != ItemType.Buff )
                             {
@@ -124,22 +125,22 @@ namespace JobBars.Cooldowns
                                 if( recastActive ) break;
                             }
                         }
-                        if( recastActive && Config.CD > 0 )
+                        if( recastActive && _CooldownConfig.CD > 0 )
                         {
                             // 计算到下一次充能完成的时间
-                            var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                            var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
                             TimeLeft = timeUntilNextCharge;
                         }
                         else
                         {
-                            TimeLeft = Config.CD;
+                            TimeLeft = _CooldownConfig.CD;
                         }
                     }
                 }
                 else
                 {
                     // 非充能技能，使用原来的逻辑
-                    TimeLeft = ( float )( Config.CD - ( DateTime.Now - LastActiveTime ).TotalSeconds );
+                    TimeLeft = ( float )( _CooldownConfig.CD - ( DateTime.Now - LastActiveTime ).TotalSeconds );
 
                     if( TimeLeft <= 0 )
                     {
@@ -147,7 +148,7 @@ namespace JobBars.Cooldowns
                     }
                 }
             }
-            else if( State == TrackerState.OffCD && Config.MaxCharges > 1 )
+            else if( State == TrackerState.OffCD && _CooldownConfig.MaxCharges > 1 )
             {
                 // 对于充能技能，检查充能状态
                 if( CurrentCharges <= 0 )
@@ -157,7 +158,7 @@ namespace JobBars.Cooldowns
                     // 计算剩余冷却时间
                     var recastActive = false;
                     float timeElapsed = 0;
-                    foreach( var triggerItem in Config.Triggers )
+                    foreach( var triggerItem in _CooldownConfig.Triggers )
                     {
                         if( triggerItem.Type != ItemType.Buff )
                         {
@@ -165,22 +166,22 @@ namespace JobBars.Cooldowns
                             if( recastActive ) break;
                         }
                     }
-                    if( recastActive && Config.CD > 0 )
+                    if( recastActive && _CooldownConfig.CD > 0 )
                     {
-                        var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                        var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
                         TimeLeft = timeUntilNextCharge;
                     }
                     else
                     {
-                        TimeLeft = Config.CD;
+                        TimeLeft = _CooldownConfig.CD;
                     }
                 }
-                else if( CurrentCharges < Config.MaxCharges )
+                else if( CurrentCharges < _CooldownConfig.MaxCharges )
                 {
                     // 充能未满，计算到下一次充能完成的时间
                     var recastActive = false;
                     float timeElapsed = 0;
-                    foreach( var triggerItem in Config.Triggers )
+                    foreach( var triggerItem in _CooldownConfig.Triggers )
                     {
                         if( triggerItem.Type != ItemType.Buff )
                         {
@@ -188,9 +189,9 @@ namespace JobBars.Cooldowns
                             if( recastActive ) break;
                         }
                     }
-                    if( recastActive && Config.CD > 0 )
+                    if( recastActive && _CooldownConfig.CD > 0 )
                     {
-                        var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                        var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
                         TimeLeft = timeUntilNextCharge;
                     }
                     else
@@ -209,42 +210,43 @@ namespace JobBars.Cooldowns
         private int CalculateCurrentCharges()
         {
             // 查找第一个有效的动作触发器来计算充能
-            foreach( var trigger in Config.Triggers )
+            foreach( var trigger in _CooldownConfig.Triggers )
             {
                 // 只处理动作类型（Action, GCD, OGCD），不处理 Buff
                 if( trigger.Type != ItemType.Buff )
                 {
                     var recastActive = UiHelper.GetRecastActive( trigger.Id, out var timeElapsed );
-                    if( recastActive && Config.CD > 0 )
+                    if( recastActive && _CooldownConfig.CD > 0 )
                     {
                         // 参考 GaugeChargesTracker 的逻辑
-                        var charges = ( int )Math.Floor( timeElapsed / Config.CD );
+                        var charges = ( int )Math.Floor( timeElapsed / _CooldownConfig.CD );
                         // 确保充能次数不超过最大充能
-                        return Math.Min( charges, Config.MaxCharges );
+                        // Dalamud.Log( $"充能次数2：{charges}" );
+                        return Math.Min( charges, _CooldownConfig.MaxCharges );
                     }
                     else
                     {
                         // 不在冷却，充能已满
-                        return Config.MaxCharges;
+                        return _CooldownConfig.MaxCharges;
                     }
                 }
             }
             // 如果没有找到有效的触发器，返回最大充能
-            return Config.MaxCharges;
+            return _CooldownConfig.MaxCharges;
         }
 
         public void TickUi( CooldownNode node, float percent )
         {
             if( node == null ) return;
 
-            if( node?.IconId != Config.Icon ) node.LoadIcon( Config.Icon );
+            if( node?.IconId != _CooldownConfig.Icon ) node.LoadIcon( _CooldownConfig.Icon );
 
             node.IsVisible = true;
 
             // 设置充能次数显示（右下角）
-            if( Config.MaxCharges > 1 )
+            if( _CooldownConfig.MaxCharges > 1 )
             {
-                node.SetCharges( CurrentCharges, Config.MaxCharges );
+                node.SetCharges( CurrentCharges, _CooldownConfig.MaxCharges );
             }
             else
             {
@@ -261,7 +263,7 @@ namespace JobBars.Cooldowns
             {
                 node.SetOffCd();
                 node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
-                if( Config.ShowBorderWhenActive )
+                if( _CooldownConfig.ShowBorderWhenActive )
                 {
                     node.SetDash( percent );
                 }
@@ -272,13 +274,22 @@ namespace JobBars.Cooldowns
             }
             else if( State == TrackerState.OnCD )
             {
-                node.SetOnCd();
+                // 对于充能技能，只有当充能次数为0时才应用冷却透明度
+                if( _CooldownConfig.MaxCharges > 1 && CurrentCharges > 0 )
+                {
+                    node.SetOffCd(); // 有充能可用，不应用透明度
+                }
+                else
+                {
+                    node.SetOnCd(); // 充能用完或非充能技能，应用透明度
+                }
+                
                 // 对于充能技能，如果充能未满，显示倒计时
-                if( Config.MaxCharges > 1 && CurrentCharges < Config.MaxCharges )
+                if( _CooldownConfig.MaxCharges > 1 && CurrentCharges < _CooldownConfig.MaxCharges )
                 {
                     node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
                 }
-                else if( Config.MaxCharges <= 1 )
+                else if( _CooldownConfig.MaxCharges <= 1 )
                 {
                     // 非充能技能，正常显示倒计时
                     node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
@@ -294,12 +305,12 @@ namespace JobBars.Cooldowns
             {
                 node.SetOffCd();
                 // 对于充能技能，如果充能未满，显示倒计时
-                if( Config.MaxCharges > 1 && CurrentCharges < Config.MaxCharges )
+                if( _CooldownConfig.MaxCharges > 1 && CurrentCharges < _CooldownConfig.MaxCharges )
                 {
                     // 计算到下一次充能完成的时间
                     var recastActive = false;
                     float timeElapsed = 0;
-                    foreach( var triggerItem in Config.Triggers )
+                    foreach( var triggerItem in _CooldownConfig.Triggers )
                     {
                         if( triggerItem.Type != ItemType.Buff )
                         {
@@ -307,9 +318,9 @@ namespace JobBars.Cooldowns
                             if( recastActive ) break;
                         }
                     }
-                    if( recastActive && Config.CD > 0 )
+                    if( recastActive && _CooldownConfig.CD > 0 )
                     {
-                        var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                        var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
                         node.SetText( ( ( int )Math.Round( timeUntilNextCharge ) ).ToString() );
                     }
                     else
@@ -321,7 +332,7 @@ namespace JobBars.Cooldowns
                 {
                     node.SetText( "" );
                 }
-                if( Config.ShowBorderWhenOffCD ) node.SetDash( percent );
+                if( _CooldownConfig.ShowBorderWhenOffCD ) node.SetDash( percent );
                 else node.SetNoDash();
             }
         }

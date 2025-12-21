@@ -47,6 +47,25 @@ namespace JobBars.Jobs {
         public static Cursor Cursors => new( JobIds.WHM, CursorType.None, CursorType.CastTime );
 
         public static CooldownConfig[] Cooldowns => [
+            
+            new CooldownConfig(UiHelper.Localize(ActionIds.水流幕), new CooldownProps {
+                Icon = ActionIds.水流幕,
+                CD = 60,
+                Triggers = [new Item(ActionIds.水流幕)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.神祝祷), new CooldownProps {
+                Icon = ActionIds.神祝祷,
+                CD = 30,
+                MaxCharges = 2,
+                Triggers = [new Item(ActionIds.神祝祷)]
+            }),
+            new CooldownConfig(UiHelper.Localize(ActionIds.神名), new CooldownProps {
+                Icon = ActionIds.神名,
+                CD = 60,
+                MaxCharges = 2,
+                Triggers = [new Item(ActionIds.神名)]
+            }),
+            
             new CooldownConfig(UiHelper.Localize(ActionIds.法令), new CooldownProps {
                 Icon = ActionIds.法令,
                 Duration = 10,
