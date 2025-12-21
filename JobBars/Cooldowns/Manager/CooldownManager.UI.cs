@@ -78,6 +78,13 @@ namespace JobBars.Cooldowns.Manager {
                 if( JobBars.Configuration.CooldownsTextSize > 255 ) JobBars.Configuration.CooldownsTextSize = 255;
                 JobBars.Configuration.Save();
             }
+
+            ImGui.SetNextItemWidth( 100f );
+            if( ImGui.InputInt( "充能次数字体大小" + Id, ref JobBars.Configuration.CooldownsChargesTextSize ) ) {
+                if( JobBars.Configuration.CooldownsChargesTextSize <= 0 ) JobBars.Configuration.CooldownsChargesTextSize = 1;
+                if( JobBars.Configuration.CooldownsChargesTextSize > 255 ) JobBars.Configuration.CooldownsChargesTextSize = 255;
+                JobBars.Configuration.Save();
+            }
         }
 
         protected override void DrawItem( CooldownConfig[] item, JobIds job ) {

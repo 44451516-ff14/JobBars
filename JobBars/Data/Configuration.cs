@@ -144,6 +144,7 @@ namespace JobBars.Data {
 
         public bool CooldownsLeftAligned = false;
         public int CooldownsTextSize = 12;
+        public int CooldownsChargesTextSize = 9; // 充能次数字体大小
 
         public BoolValueConfig CooldownEnabled = new( true );
         public IntValueConfig CooldownOrder = new( -1 );

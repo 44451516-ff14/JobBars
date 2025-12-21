@@ -11,6 +11,7 @@ namespace JobBars.Nodes.Cooldown {
         public static readonly ushort HEIGHT = 30;
 
         private readonly TextNode Text;
+        private readonly TextNode ChargesText; // 右下角显示充能次数
         private readonly SimpleImageNode Icon;
         private readonly SimpleImageNode Border;
 
@@ -56,9 +57,25 @@ namespace JobBars.Nodes.Cooldown {
                 String = "",
             };
 
+            // 充能次数文本节点（与倒计时文字相同位置）
+            ChargesText = new TextNode() {
+                NodeId = JobBars.NodeId++,
+                Size = new( WIDTH, HEIGHT ),
+                FontSize = ( uint )JobBars.Configuration.CooldownsChargesTextSize,
+                LineSpacing = ( byte )HEIGHT,
+                AlignmentType = (AlignmentType)52, // 与倒计时文字相同的对齐方式
+                TextColor = new( 1, 1, 0.5f, 1 ), // 黄色
+                TextOutlineColor = new( 0, 0, 0, 1 ),
+                TextId = 0,
+                TextFlags = TextFlags.Edge,
+                String = "",
+            };
+            ChargesText.IsVisible = false;
+
             Icon.AttachNode( this, NodePosition.AsLastChild );
             Border.AttachNode( this, NodePosition.AsLastChild );
             Text.AttachNode( this, NodePosition.AsLastChild );
+            ChargesText.AttachNode( this, NodePosition.AsLastChild );
         }
 
         public void SetNoDash() {
@@ -84,6 +101,19 @@ namespace JobBars.Nodes.Cooldown {
             Text.FontSize = baseSize;
             Text.String = text;
             Text.IsVisible = true;
+        }
+
+        public void SetCharges( int currentCharges, int maxCharges ) {
+            // 更新字体大小以反映配置变化
+            ChargesText.FontSize = ( uint )JobBars.Configuration.CooldownsChargesTextSize;
+            
+            if( maxCharges > 1 && currentCharges < maxCharges ) {
+                ChargesText.String = currentCharges.ToString();
+                ChargesText.IsVisible = true;
+            }
+            else {
+                ChargesText.IsVisible = false;
+            }
         }
 
         public void SetOnCd() {
@@ -114,6 +144,7 @@ namespace JobBars.Nodes.Cooldown {
                 Icon.Dispose();
                 Border.Dispose();
                 Text.Dispose();
+                ChargesText.Dispose();
                 base.Dispose( disposing, isNativeDestructor );
             }
         }

@@ -9,6 +9,7 @@ namespace JobBars.Cooldowns {
         public Item[] Triggers;
         public float Duration;
         public float CD;
+        public int MaxCharges; // 最大充能次数，默认为1（非充能技能）
     }
 
     public class CooldownConfig {
@@ -18,6 +19,7 @@ namespace JobBars.Cooldowns {
         public readonly Item[] Triggers;
         public readonly float Duration;
         public readonly float CD;
+        public readonly int MaxCharges; // 最大充能次数，默认为1（非充能技能）
 
         public bool Enabled { get; private set; }
         public int Order { get; private set; }
@@ -33,6 +35,7 @@ namespace JobBars.Cooldowns {
             Triggers = props.Triggers;
             Duration = props.Duration;
             CD = props.CD;
+            MaxCharges = props.MaxCharges > 0 ? props.MaxCharges : 1; // 默认为1（非充能技能）
             Enabled = JobBars.Configuration.CooldownEnabled.Get( NameId );
             Order = JobBars.Configuration.CooldownOrder.Get( NameId );
             ShowBorderWhenActive = JobBars.Configuration.CooldownShowBorderWhenActive.Get( NameId );

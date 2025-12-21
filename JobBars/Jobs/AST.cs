@@ -78,13 +78,21 @@ namespace JobBars.Jobs
 
         public static CooldownConfig[] Cooldowns =>
         [
+            new CooldownConfig( UiHelper.Localize( ActionIds.天星交错 ), new CooldownProps
+            {
+                Icon = ActionIds.天星交错,
+                CD = 30,
+                MaxCharges = 3,
+                Triggers = [new Item( ActionIds.天星交错 )]
+            } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.CollectiveUnconscious ), new CooldownProps
             {
                 Icon = ActionIds.CollectiveUnconscious,
                 Duration = 10,
                 CD = 60,
                 Triggers = [new Item( ActionIds.CollectiveUnconscious )]
-            } ), new CooldownConfig( UiHelper.Localize( ActionIds.擢升 ), new CooldownProps
+            } ),
+            new CooldownConfig( UiHelper.Localize( ActionIds.擢升 ), new CooldownProps
             {
                 Icon = ActionIds.擢升,
                 CD = 60,

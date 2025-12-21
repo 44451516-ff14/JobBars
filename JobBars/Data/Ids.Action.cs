@@ -102,6 +102,7 @@ namespace JobBars.Data {
         Lightspeed = 3606,
         StellarDetonation = 8324,
         擢升 = 25873,
+        天星交错 = 16556,
         Macrocosmos = 25874,
         Astrodyne = 25870,
         MinorArcana = 7443,
