@@ -143,6 +143,7 @@ namespace JobBars.Data {
         public bool CooldownsStateShowOffCD = true;
 
         public bool CooldownsLeftAligned = false;
+        public int CooldownsTextSize = 12;
 
         public BoolValueConfig CooldownEnabled = new( true );
         public IntValueConfig CooldownOrder = new( -1 );

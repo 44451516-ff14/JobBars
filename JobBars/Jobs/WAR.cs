@@ -129,7 +129,7 @@ namespace JobBars.Jobs
                     Icons = [ActionIds.铁壁],
                     Triggers =
                     [
-                        new IconBuffTriggerStruct { Trigger = new Item( BuffIds.Rampart ), Duration = 20 }
+                        new IconBuffTriggerStruct { Trigger = new Item( BuffIds.铁壁 ), Duration = 20 }
                     ]
                 } ),
             new IconBuffReplacer( UiHelper.Localize( BuffIds.Damnation ), new IconBuffProps

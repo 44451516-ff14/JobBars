@@ -2,7 +2,7 @@ namespace JobBars.Data {
     public enum BuffIds : uint {
 
         // DRK =========
-        Rampart = 1191, // All tanks
+        铁壁 = 1191, // All tanks
         ArmsLength = 1209, // All tanks
         Delirium = 1972,
         EnhancedDelirium = 3836,

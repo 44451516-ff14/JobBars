@@ -46,7 +46,7 @@ namespace JobBars.Nodes.Cooldown {
             Text = new TextNode() {
                 NodeId = JobBars.NodeId++,
                 Size = new( WIDTH, HEIGHT ),
-                FontSize = 21,
+                FontSize = ( uint )JobBars.Configuration.CooldownsTextSize,
                 LineSpacing = ( byte )HEIGHT,
                 AlignmentType = (AlignmentType)52,
                 TextColor = new( 1, 1, 1, 1 ),
@@ -80,7 +80,8 @@ namespace JobBars.Nodes.Cooldown {
         }
 
         public void SetText( string text ) {
-            Text.FontSize = text.Length > 2 ? 20u : 17u;
+            var baseSize = ( uint )JobBars.Configuration.CooldownsTextSize;
+            Text.FontSize = baseSize;
             Text.String = text;
             Text.IsVisible = true;
         }

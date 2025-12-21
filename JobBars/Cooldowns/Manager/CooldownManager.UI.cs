@@ -71,6 +71,13 @@ namespace JobBars.Cooldowns.Manager {
 
             ImGui.SetNextItemWidth( 50f );
             if( ImGui.InputFloat( "冷却时透明度" + Id, ref JobBars.Configuration.CooldownsOnCDOpacity ) ) JobBars.Configuration.Save();
+
+            ImGui.SetNextItemWidth( 100f );
+            if( ImGui.InputInt( "冷却时间文字大小" + Id, ref JobBars.Configuration.CooldownsTextSize ) ) {
+                if( JobBars.Configuration.CooldownsTextSize <= 0 ) JobBars.Configuration.CooldownsTextSize = 1;
+                if( JobBars.Configuration.CooldownsTextSize > 255 ) JobBars.Configuration.CooldownsTextSize = 255;
+                JobBars.Configuration.Save();
+            }
         }
 
         protected override void DrawItem( CooldownConfig[] item, JobIds job ) {
