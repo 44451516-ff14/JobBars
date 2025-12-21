@@ -221,7 +221,6 @@ namespace JobBars.Cooldowns
                         // 参考 GaugeChargesTracker 的逻辑
                         var charges = ( int )Math.Floor( timeElapsed / _CooldownConfig.CD );
                         // 确保充能次数不超过最大充能
-                        // Dalamud.Log( $"充能次数2：{charges}" );
                         return Math.Min( charges, _CooldownConfig.MaxCharges );
                     }
                     else
