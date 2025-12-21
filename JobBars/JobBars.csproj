@@ -20,8 +20,9 @@
         <None Remove="lib\**"/>
     </ItemGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
         <NoWarn>1701;1702;1591</NoWarn>
+        <OutputPath>C:\Games\FF14\Dalamud\XIVLauncher\devPlugins\JobBars\</OutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

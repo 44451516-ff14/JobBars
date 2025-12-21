@@ -61,7 +61,7 @@ namespace JobBars.Jobs {
                 CD = 60,
                 Triggers = [new Item(ActionIds.DarkMind)]
             }),
-            new CooldownConfig(UiHelper.Localize(ActionIds.DarkMind), new CooldownProps {
+            new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
                 Icon = ActionIds.铁壁,
                 Duration = 20,
                 CD = 90,
