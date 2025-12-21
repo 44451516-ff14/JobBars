@@ -105,16 +105,15 @@ namespace JobBars.Cooldowns
                 // 对于充能技能，使用实时计算的充能次数来判断状态
                 if( Config.MaxCharges > 1 )
                 {
-                    if( CurrentCharges > 0 )
+                    if( CurrentCharges >= Config.MaxCharges )
                     {
-                        // 还有充能可用，切换到 OffCD 状态
+                        // 充能已满，切换到 OffCD 状态
                         State = TrackerState.OffCD;
                         TimeLeft = 0;
                     }
                     else
                     {
-                        // 所有充能都在冷却，计算剩余冷却时间
-                        // 需要计算到下一次充能完成的时间
+                        // 充能未满，保持在 OnCD 状态，计算到下一次充能完成的时间
                         var recastActive = false;
                         float timeElapsed = 0;
                         foreach( var triggerItem in Config.Triggers )
@@ -150,9 +149,10 @@ namespace JobBars.Cooldowns
             }
             else if( State == TrackerState.OffCD && Config.MaxCharges > 1 )
             {
-                // 对于充能技能，检查是否还有充能
+                // 对于充能技能，检查充能状态
                 if( CurrentCharges <= 0 )
                 {
+                    // 所有充能都用完，切换到 OnCD 状态
                     State = TrackerState.OnCD;
                     // 计算剩余冷却时间
                     var recastActive = false;
@@ -175,6 +175,34 @@ namespace JobBars.Cooldowns
                         TimeLeft = Config.CD;
                     }
                 }
+                else if( CurrentCharges < Config.MaxCharges )
+                {
+                    // 充能未满，计算到下一次充能完成的时间
+                    var recastActive = false;
+                    float timeElapsed = 0;
+                    foreach( var triggerItem in Config.Triggers )
+                    {
+                        if( triggerItem.Type != ItemType.Buff )
+                        {
+                            recastActive = UiHelper.GetRecastActive( triggerItem.Id, out timeElapsed );
+                            if( recastActive ) break;
+                        }
+                    }
+                    if( recastActive && Config.CD > 0 )
+                    {
+                        var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                        TimeLeft = timeUntilNextCharge;
+                    }
+                    else
+                    {
+                        TimeLeft = 0;
+                    }
+                }
+                else
+                {
+                    // 充能已满
+                    TimeLeft = 0;
+                }
             }
         }
 
@@ -189,10 +217,9 @@ namespace JobBars.Cooldowns
                     var recastActive = UiHelper.GetRecastActive( trigger.Id, out var timeElapsed );
                     if( recastActive && Config.CD > 0 )
                     {
-                        // 正在冷却中，计算已充能次数
-                        // timeElapsed 是从上次使用开始经过的时间
-                        // 每次充能需要 CD 时间，所以已充能次数 = floor(timeElapsed / CD)
+                        // 参考 GaugeChargesTracker 的逻辑
                         var charges = ( int )Math.Floor( timeElapsed / Config.CD );
+                        // 确保充能次数不超过最大充能
                         return Math.Min( charges, Config.MaxCharges );
                     }
                     else
@@ -246,13 +273,54 @@ namespace JobBars.Cooldowns
             else if( State == TrackerState.OnCD )
             {
                 node.SetOnCd();
-                node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
+                // 对于充能技能，如果充能未满，显示倒计时
+                if( Config.MaxCharges > 1 && CurrentCharges < Config.MaxCharges )
+                {
+                    node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
+                }
+                else if( Config.MaxCharges <= 1 )
+                {
+                    // 非充能技能，正常显示倒计时
+                    node.SetText( ( ( int )Math.Round( TimeLeft ) ).ToString() );
+                }
+                else
+                {
+                    // 充能已满，不显示倒计时
+                    node.SetText( "" );
+                }
                 node.SetNoDash();
             }
             else if( State == TrackerState.OffCD )
             {
                 node.SetOffCd();
-                node.SetText( "" );
+                // 对于充能技能，如果充能未满，显示倒计时
+                if( Config.MaxCharges > 1 && CurrentCharges < Config.MaxCharges )
+                {
+                    // 计算到下一次充能完成的时间
+                    var recastActive = false;
+                    float timeElapsed = 0;
+                    foreach( var triggerItem in Config.Triggers )
+                    {
+                        if( triggerItem.Type != ItemType.Buff )
+                        {
+                            recastActive = UiHelper.GetRecastActive( triggerItem.Id, out timeElapsed );
+                            if( recastActive ) break;
+                        }
+                    }
+                    if( recastActive && Config.CD > 0 )
+                    {
+                        var timeUntilNextCharge = Config.CD - ( timeElapsed % Config.CD );
+                        node.SetText( ( ( int )Math.Round( timeUntilNextCharge ) ).ToString() );
+                    }
+                    else
+                    {
+                        node.SetText( "" );
+                    }
+                }
+                else
+                {
+                    node.SetText( "" );
+                }
                 if( Config.ShowBorderWhenOffCD ) node.SetDash( percent );
                 else node.SetNoDash();
             }
