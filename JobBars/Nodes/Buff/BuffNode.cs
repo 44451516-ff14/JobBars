@@ -91,7 +91,7 @@ namespace JobBars.Nodes.Buff {
         }
 
         public void SetOnCd() {
-            MultiplyColor = new( 75f / 255f, 75f / 255f, 75f / 255f );
+            MultiplyColor = new( 75f / 100f, 75f / 100f, 75f / 100f );
             Color = Color with {
                 W = JobBars.Configuration.BuffOnCDOpacity
             };

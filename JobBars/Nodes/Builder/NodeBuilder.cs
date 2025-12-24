@@ -139,7 +139,7 @@ namespace JobBars.Nodes.Builder {
                 if( name == "_PartyList" ) {
                     HighlightRoot = new();
 
-                    HighlightRoot.AttachNode( addon->GetNodeById( 20 ), NodePosition.AfterTarget );
+                    HighlightRoot.AttachNode( addon->GetNodeById( 21 ), NodePosition.AfterTarget );
                 }
 
                 IsAttached.Add( name );
