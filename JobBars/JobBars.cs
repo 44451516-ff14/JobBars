@@ -1,3 +1,4 @@
+using System;
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
@@ -12,7 +13,6 @@ using JobBars.Helper;
 using JobBars.Icons.Manager;
 using JobBars.Nodes.Builder;
 using KamiToolKit;
-using System;
 
 namespace JobBars {
     public unsafe partial class JobBars : IDalamudPlugin {
@@ -77,6 +77,7 @@ namespace JobBars {
             Dalamud.ClientState.Login += OnLogin;
             Dalamud.ClientState.Logout += OnLogout;
             Dalamud.ClientState.TerritoryChanged += OnZoneChange;
+            Dalamud.DutyState.DutyStarted += OnDutyStarted;
 
         }
 
@@ -93,6 +94,7 @@ namespace JobBars {
             Dalamud.ClientState.Login -= OnLogin;
             Dalamud.ClientState.Logout -= OnLogout;
             Dalamud.ClientState.TerritoryChanged -= OnZoneChange;
+            Dalamud.DutyState.DutyStarted -= OnDutyStarted;
 
             Animation.Dispose();
             NodeBuilder?.Dispose();
@@ -148,10 +150,16 @@ namespace JobBars {
         private void OnZoneChange( ushort newZoneId ) {
             if( !NodeBuilder.IsLoaded ) return;
 
-            GaugeManager?.Reset();
-            IconManager?.Reset();
-            BuffManager?.Reset();
+            GaugeManager.Reset();
+            IconManager.Reset();
+            BuffManager.Reset();
             UiHelper.ResetTicks();
+        }
+
+        private void OnDutyStarted( object? sender, ushort territoryId ) {
+            // 此时通常就是 CD 重置的时机
+            Dalamud.Log( $"副本已开始，地图ID: {territoryId}" );
+            CooldownManager.ResetTrackers();
         }
 
         private static void CheckForJobChange() {

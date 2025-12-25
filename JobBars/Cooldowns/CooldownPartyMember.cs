@@ -78,7 +78,7 @@ namespace JobBars.Cooldowns
                 if( !prop.Enabled ) continue;
                 count++;
                 if( count > CooldownRow.MAX_ITEMS ) continue;
-                Trackers.Add( new CooldownTracker( prop ) );
+                Trackers.Add( new CooldownTracker( prop, ObjectId ) );
             }
         }
 
