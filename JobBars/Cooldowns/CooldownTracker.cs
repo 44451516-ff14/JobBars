@@ -36,10 +36,10 @@ namespace JobBars.Cooldowns
 
         public static List< uint > AdjustedActionList = new()
         {
-            ( uint )ActionIds.预警, 
-            ( uint )ActionIds.圣盾阵, 
-            ( uint )ActionIds.星云, 
-            ( uint )ActionIds.暗影墙, 
+            ( uint )ActionIds.预警,
+            ( uint )ActionIds.圣盾阵,
+            ( uint )ActionIds.星云,
+            ( uint )ActionIds.暗影墙,
             ( uint )ActionIds.石之心,
             ( uint )ActionIds.自生
         };
@@ -125,6 +125,7 @@ namespace JobBars.Cooldowns
                                 if( recastActive ) break;
                             }
                         }
+
                         if( recastActive && _CooldownConfig.CD > 0 )
                         {
                             // 计算到下一次充能完成的时间
@@ -166,6 +167,7 @@ namespace JobBars.Cooldowns
                             if( recastActive ) break;
                         }
                     }
+
                     if( recastActive && _CooldownConfig.CD > 0 )
                     {
                         var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
@@ -189,6 +191,7 @@ namespace JobBars.Cooldowns
                             if( recastActive ) break;
                         }
                     }
+
                     if( recastActive && _CooldownConfig.CD > 0 )
                     {
                         var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
@@ -230,15 +233,18 @@ namespace JobBars.Cooldowns
                     }
                 }
             }
+
             // 如果没有找到有效的触发器，返回最大充能
             return _CooldownConfig.MaxCharges;
         }
 
         public void TickUi( CooldownNode node, float percent )
         {
-            if( node == null ) return;
+            if( node == null ) 
+                return;
 
-            if( node?.IconId != _CooldownConfig.Icon ) node.LoadIcon( _CooldownConfig.Icon );
+            if( node?.IconId != _CooldownConfig.Icon )
+                node.LoadIcon( _CooldownConfig.Icon );
 
             node.IsVisible = true;
 
@@ -282,7 +288,7 @@ namespace JobBars.Cooldowns
                 {
                     node.SetOnCd(); // 充能用完或非充能技能，应用透明度
                 }
-                
+
                 // 对于充能技能，如果充能未满，显示倒计时
                 if( _CooldownConfig.MaxCharges > 1 && CurrentCharges < _CooldownConfig.MaxCharges )
                 {
@@ -298,6 +304,7 @@ namespace JobBars.Cooldowns
                     // 充能已满，不显示倒计时
                     node.SetText( "" );
                 }
+
                 node.SetNoDash();
             }
             else if( State == TrackerState.OffCD )
@@ -314,9 +321,11 @@ namespace JobBars.Cooldowns
                         if( triggerItem.Type != ItemType.Buff )
                         {
                             recastActive = UiHelper.GetRecastActive( triggerItem.Id, out timeElapsed );
-                            if( recastActive ) break;
+                            if( recastActive )
+                                break;
                         }
                     }
+
                     if( recastActive && _CooldownConfig.CD > 0 )
                     {
                         var timeUntilNextCharge = _CooldownConfig.CD - ( timeElapsed % _CooldownConfig.CD );
@@ -331,7 +340,9 @@ namespace JobBars.Cooldowns
                 {
                     node.SetText( "" );
                 }
-                if( _CooldownConfig.ShowBorderWhenOffCD ) node.SetDash( percent );
+
+                if( _CooldownConfig.ShowBorderWhenOffCD )
+                    node.SetDash( percent );
                 else node.SetNoDash();
             }
         }

@@ -21,8 +21,10 @@ namespace JobBars {
                 return;
             }
 
+            
             var id = *( ( uint* )effectHeader.ToPointer() + 0x2 );
             var type = *( ( byte* )effectHeader.ToPointer() + 0x1F ); // 1 = action
+           
 
             var selfId = ( int )Dalamud.ClientState.LocalPlayer.GameObjectId;
             var isSelf = sourceId == selfId;
