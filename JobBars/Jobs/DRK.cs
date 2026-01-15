@@ -57,44 +57,44 @@ namespace JobBars.Jobs {
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.TheBlackestNight), new CooldownProps {
                 Icon = ActionIds.TheBlackestNight,
-                Duration = 7,
+                // Duration = 7,
                 CD = 15,
                 Triggers = [new Item(ActionIds.TheBlackestNight)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.DarkMind), new CooldownProps {
                 Icon = ActionIds.DarkMind,
-                Duration = 10,
+                // Duration = 10,
                 CD = 60,
                 Triggers = [new Item(ActionIds.DarkMind)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
                 Icon = ActionIds.铁壁,
-                Duration = 20,
+                // Duration = 20,
                 CD = 90,
                 Triggers = [new Item(ActionIds.铁壁)]
             }),
         
             new CooldownConfig($"{UiHelper.Localize(ActionIds.暗影墙)} ({UiHelper.Localize(JobIds.DRK)})", new CooldownProps {
                 Icon = ActionIds.暗影墙,
-                Duration = 15,
+                // Duration = 15,
                 CD = 120,
                 Triggers = [new Item(ActionIds.暗影墙)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.LivingDead), new CooldownProps {
                 Icon = ActionIds.LivingDead,
-                Duration = 10,
+                // Duration = 10,
                 CD = 300,
                 Triggers = [new Item(BuffIds.LivingDead)]
             }),
             new CooldownConfig($"{UiHelper.Localize(ActionIds.雪仇)} ({UiHelper.Localize(JobIds.DRK)})", new CooldownProps {
                 Icon = ActionIds.雪仇,
-                Duration = 15,
+                // Duration = 15,
                 CD = 60,
                 Triggers = [new Item(ActionIds.雪仇)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.DarkMissionary), new CooldownProps {
                 Icon = ActionIds.DarkMissionary,
-                Duration = 15,
+                // Duration = 15,
                 CD = 90,
                 Triggers = [new Item(ActionIds.DarkMissionary)]
             }),

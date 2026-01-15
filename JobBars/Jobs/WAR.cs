@@ -57,7 +57,7 @@ namespace JobBars.Jobs
             new CooldownConfig( UiHelper.Localize( ActionIds.Bloodwhetting ), new CooldownProps
             {
                 Icon = ActionIds.Bloodwhetting,
-                Duration = 6,
+                // Duration = 6,
                 CD = 25,
                 Triggers =
                 [
@@ -69,28 +69,28 @@ namespace JobBars.Jobs
             new CooldownConfig( UiHelper.Localize( ActionIds.铁壁 ), new CooldownProps
             {
                 Icon = ActionIds.铁壁,
-                Duration = 20,
+                // Duration = 20,
                 CD = 90,
                 Triggers = [new Item( ActionIds.铁壁 )]
             } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.ThrillOfBattle ), new CooldownProps
             {
                 Icon = ActionIds.ThrillOfBattle,
-                Duration = 10,
+                // Duration = 10,
                 CD = 90,
                 Triggers = [new Item( ActionIds.ThrillOfBattle )]
             } ),
-            new CooldownConfig( UiHelper.Localize( ActionIds.Vengeance ), new CooldownProps
+            new CooldownConfig( UiHelper.Localize( ActionIds.复仇 ), new CooldownProps
             {
-                Icon = ActionIds.Vengeance,
-                Duration = 15,
+                Icon = ActionIds.复仇,
+                // Duration = 15,
                 CD = 120,
-                Triggers = [new Item( ActionIds.Vengeance )]
+                Triggers = [new Item( ActionIds.复仇 )]
             } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.Holmgang ), new CooldownProps
             {
                 Icon = ActionIds.Holmgang,
-                Duration = 10,
+                // Duration = 10,
                 CD = 240,
                 Triggers = [new Item( ActionIds.Holmgang )]
             } ),
@@ -105,7 +105,7 @@ namespace JobBars.Jobs
             new CooldownConfig( UiHelper.Localize( ActionIds.ShakeItOff ), new CooldownProps
             {
                 Icon = ActionIds.ShakeItOff,
-                Duration = 15,
+                // Duration = 15,
                 CD = 90,
                 Triggers = [new Item( ActionIds.ShakeItOff )]
             } ),
@@ -137,7 +137,7 @@ namespace JobBars.Jobs
                 IconType = IconActionType.Buff,
                 Icons =
                 [
-                    ActionIds.Vengeance,
+                    ActionIds.复仇,
                     ActionIds.Damnation
                 ],
                 Triggers =

@@ -34,37 +34,37 @@ namespace JobBars.Jobs {
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
                 Icon = ActionIds.铁壁,
-                Duration = 20,
+                // Duration = 20,
                 CD = 90,
                 Triggers = [new Item(ActionIds.铁壁)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.伪装), new CooldownProps {
                 Icon = ActionIds.伪装,
-                Duration = 20,
+                // Duration = 20,
                 CD = 90,
                 Triggers = [new Item(ActionIds.伪装)]
             }),
             new CooldownConfig($"{UiHelper.Localize(ActionIds.星云)} ({UiHelper.Localize(JobIds.GNB)})", new CooldownProps {
                 Icon = ActionIds.星云,
-                Duration = 15,
+                // Duration = 15,
                 CD = 120,
                 Triggers = [new Item(ActionIds.星云)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.超火流星), new CooldownProps {
                 Icon = ActionIds.超火流星,
-                Duration = 10,
+                // Duration = 10,
                 CD = 360,
                 Triggers = [new Item(ActionIds.超火流星)]
             }),
             new CooldownConfig($"{UiHelper.Localize(ActionIds.雪仇)} ({UiHelper.Localize(JobIds.GNB)})", new CooldownProps {
                 Icon = ActionIds.雪仇,
-                Duration = 15,
+                // Duration = 15,
                 CD = 60,
                 Triggers = [new Item(ActionIds.雪仇)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.光之心), new CooldownProps {
                 Icon = ActionIds.光之心,
-                Duration = 15,
+                // Duration = 15,
                 CD = 90,
                 Triggers = [new Item(ActionIds.光之心)]
             })

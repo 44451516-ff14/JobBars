@@ -26,7 +26,7 @@ namespace JobBars.Data {
         RawIntuition = 3551,
         StormsEye = 45,
         Bloodwhetting = 25751,
-        Vengeance = 44,
+        复仇 = 44,
         ThrillOfBattle = 40,
         Damnation = 36923,
 

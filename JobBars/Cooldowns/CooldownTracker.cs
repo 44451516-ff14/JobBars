@@ -47,7 +47,9 @@ namespace JobBars.Cooldowns
             ( uint )ActionIds.星云,
             ( uint )ActionIds.暗影墙,
             ( uint )ActionIds.石之心,
-            ( uint )ActionIds.自生
+            ( uint )ActionIds.HeartOfCorundum,
+            ( uint )ActionIds.自生,
+            ( uint )ActionIds.复仇,
         };
 
         public void ProcessAction( Item action )

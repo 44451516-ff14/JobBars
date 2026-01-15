@@ -58,6 +58,11 @@ namespace JobBars.Jobs {
                 Duration = 10,
                 CD = 120,
                 Triggers = [new Item(ActionIds.MagickBarrier)]
+            }),
+            new CooldownConfig($"{UiHelper.Localize(ActionIds.Swiftcast)} ({UiHelper.Localize(JobIds.RDM)})", new CooldownProps {
+                Icon = ActionIds.Swiftcast,
+                CD = 40,
+                Triggers = [new Item(ActionIds.Swiftcast)]
             })
         ];
 

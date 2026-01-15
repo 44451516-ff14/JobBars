@@ -57,43 +57,43 @@ namespace JobBars.Jobs {
          
             new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
                 Icon = ActionIds.铁壁,
-                Duration = 20,
+                // Duration = 20,
                 CD = 90,
                 Triggers = [new Item(ActionIds.铁壁)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.Bulwark), new CooldownProps {
                 Icon = ActionIds.Bulwark,
-                Duration = 10,
+                // Duration = 10,
                 CD = 90,
                 Triggers = [new Item(ActionIds.Bulwark)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.预警), new CooldownProps {
                 Icon = ActionIds.预警,
-                Duration = 15,
+                // Duration = 15,
                 CD = 120,
                 Triggers = [new Item(ActionIds.预警)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.神圣领域), new CooldownProps {
                 Icon = ActionIds.神圣领域,
-                Duration = 10,
+                // Duration = 10,
                 CD = 420,
                 Triggers = [new Item(ActionIds.神圣领域)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.雪仇), new CooldownProps {
                 Icon = ActionIds.雪仇,
-                Duration = 15,
+                // Duration = 15,
                 CD = 60,
                 Triggers = [new Item(ActionIds.雪仇)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.DivineVeil), new CooldownProps {
                 Icon = ActionIds.DivineVeil,
-                Duration = 30,
+                // Duration = 30,
                 CD = 90,
                 Triggers = [new Item(ActionIds.DivineVeil)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.PassageOfArms), new CooldownProps {
                 Icon = ActionIds.PassageOfArms,
-                Duration = 18,
+                // Duration = 18,
                 CD = 120,
                 Triggers = [new Item(BuffIds.PassageOfArms)]
             })
