@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Serilog;
 
 namespace JobBars.Cooldowns.Manager {
     public struct CooldownPartyMemberStruct {
@@ -33,7 +34,7 @@ namespace JobBars.Cooldowns.Manager {
 
         public void PerformAction( Item action, uint objectId ) {
             if( !JobBars.Configuration.CooldownsEnabled ) return;
-    
+            // Dalamud.Log($"打印4 {action.Id }");
             foreach( var member in ObjectIdToMember.Values ) {
                 member.ProcessAction( action, objectId );
             }

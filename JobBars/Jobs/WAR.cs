@@ -71,7 +71,7 @@ namespace JobBars.Jobs
                 Icon = ActionIds.铁壁,
                 // Duration = 20,
                 CD = 90,
-                Triggers = [new Item( ActionIds.铁壁 )]
+                Triggers = [new Item( ActionIds.铁壁)]
             } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.ThrillOfBattle ), new CooldownProps
             {
@@ -80,12 +80,12 @@ namespace JobBars.Jobs
                 CD = 90,
                 Triggers = [new Item( ActionIds.ThrillOfBattle )]
             } ),
-            new CooldownConfig( UiHelper.Localize( ActionIds.复仇 ), new CooldownProps
+            new CooldownConfig( UiHelper.Localize( ActionIds.复仇), new CooldownProps
             {
                 Icon = ActionIds.复仇,
                 // Duration = 15,
                 CD = 120,
-                Triggers = [new Item( ActionIds.复仇 )]
+                Triggers = [new Item( ActionIds.复仇),new Item(ActionIds.Damnation)]
             } ),
             new CooldownConfig( UiHelper.Localize( ActionIds.Holmgang ), new CooldownProps
             {

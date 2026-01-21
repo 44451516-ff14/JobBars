@@ -30,7 +30,7 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.石之心,
                 Duration = 7,
                 CD = 25,
-                Triggers = [new Item(ActionIds.石之心)]
+                Triggers = [new Item(ActionIds.石之心),new Item(ActionIds.HeartOfCorundum)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.铁壁), new CooldownProps {
                 Icon = ActionIds.铁壁,
@@ -48,7 +48,7 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.星云,
                 // Duration = 15,
                 CD = 120,
-                Triggers = [new Item(ActionIds.星云)]
+                Triggers = [new Item(ActionIds.星云),new Item(ActionIds.GreatNebula)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.超火流星), new CooldownProps {
                 Icon = ActionIds.超火流星,

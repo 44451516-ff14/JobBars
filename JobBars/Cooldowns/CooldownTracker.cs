@@ -5,6 +5,7 @@ using JobBars.Nodes.Cooldown;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Serilog;
 
 namespace JobBars.Cooldowns
 {
@@ -54,13 +55,16 @@ namespace JobBars.Cooldowns
 
         public void ProcessAction( Item action )
         {
+            // Dalamud.Log($"打印3 {action.Id }");
             foreach( var configTrigger in _CooldownConfig.Triggers )
             {
                 var trigger = configTrigger;
+                // Dalamud.Log($"打印2 {trigger.Id }");
                 if( AdjustedActionList.Contains( trigger.Id ) )
                 {
                     var adjustedAction = UiHelper.GetAdjustedAction( trigger.Id );
-                    if( adjustedAction == action.Id )
+                    // Dalamud.Log($"trigger {trigger.Id } action:{action.Id} adjustedAction:{adjustedAction}");
+                    if( adjustedAction == action.Id || trigger.Id == action.Id )
                     {
                         SetActive( action );
                     }
