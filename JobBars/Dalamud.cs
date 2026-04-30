@@ -1,4 +1,5 @@
 using Dalamud.Game;
+using Dalamud.Game.ClientState.Objects.SubKinds;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -20,6 +21,8 @@ namespace JobBars {
         [PluginService] public static IGameInteropProvider Hooks { get; private set; } = null;
         [PluginService] public static IAddonLifecycle AddonLifecycle { get; private set; } = null;
         [PluginService] public static IDutyState DutyState { get; private set; } = null;
+
+        public static IPlayerCharacter LocalPlayer => Objects.LocalPlayer!;
 
         public static void Error( Exception e, string message ) => PluginLog.Error( e, message );
 

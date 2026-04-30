@@ -4,7 +4,9 @@ using JobBars.Data;
 using JobBars.Helper;
 using KamiToolKit;
 using KamiToolKit.Classes;
+using KamiToolKit.Enums;
 using KamiToolKit.Nodes;
+using KamiToolKit.Premade.Node.Simple;
 
 namespace JobBars.Nodes.Buff {
     public unsafe class BuffNode : NodeBase<AtkResNode> {

@@ -49,7 +49,7 @@ namespace JobBars.Gauges.Manager {
             // ============================
 
             if( CurrentJob == JobIds.SCH && !UiHelper.OutOfCombat ) { // only need this to catch excog for now
-                JobBars.SearchForPartyMemberStatus( ( int )Dalamud.ClientState.LocalPlayer.GameObjectId, UiHelper.PlayerStatus, GaugeBuffsOnPartyMembers );
+                JobBars.SearchForPartyMemberStatus( ( int )Dalamud.LocalPlayer.GameObjectId, UiHelper.PlayerStatus, GaugeBuffsOnPartyMembers );
             }
 
             foreach( var gauge in CurrentGauges.Where( g => g.Enabled && !g.Disposed ) ) gauge.Tick();

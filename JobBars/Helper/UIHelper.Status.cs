@@ -19,8 +19,8 @@ namespace JobBars.Helper {
         public static void UpdatePlayerStatus() {
             Dictionary<Item, Status> buffDict = [];
 
-            var ownerId = ( int )Dalamud.ClientState.LocalPlayer.GameObjectId;
-            ActorToBuffItems( Dalamud.ClientState.LocalPlayer, ownerId, buffDict );
+            var ownerId = ( int )Dalamud.LocalPlayer.GameObjectId;
+            ActorToBuffItems( Dalamud.LocalPlayer, ownerId, buffDict );
 
             var prevEnemy = PreviousEnemyTarget;
             if( prevEnemy != null ) ActorToBuffItems( prevEnemy, ownerId, buffDict );

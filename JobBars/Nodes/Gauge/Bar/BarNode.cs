@@ -5,7 +5,9 @@ using KamiToolKit.Classes;
 using KamiToolKit;
 using System;
 using System.Collections.Generic;
+using KamiToolKit.Enums;
 using KamiToolKit.Nodes;
+using KamiToolKit.Premade.Node.Simple;
 
 namespace JobBars.Nodes.Gauge.Bar {
     public unsafe class BarNode : GaugeNode {

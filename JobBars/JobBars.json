@@ -6,6 +6,6 @@
     "InternalName": "JobBars",
     "Tags": [ "UI", "Bars" ],
     "RepoUrl": "https://github.com/0ceal0t/JobBars",
-    "DalamudApiLevel": 14,
+    "DalamudApiLevel": 15,
     "ApplicableVersion": "any"
 }

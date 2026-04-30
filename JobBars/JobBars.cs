@@ -1,5 +1,6 @@
 using System;
 using Dalamud.Game.ClientState.Conditions;
+using Dalamud.Game.DutyState;
 using Dalamud.Game.Command;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
@@ -52,7 +53,8 @@ namespace JobBars {
                 Configuration.Save();
             }
 
-            ReceiveActionEffectHook = Dalamud.Hooks.HookFromSignature<ReceiveActionEffectDelegate>( Constants.ReceiveActionEffectSig, ReceiveActionEffect );
+            // ReceiveActionEffectHook = Dalamud.Hooks.HookFromSignature<ReceiveActionEffectDelegate>( Constants.ReceiveActionEffectSig, ReceiveActionEffect );
+            ReceiveActionEffectHook = Dalamud.Hooks.HookFromAddress<ReceiveActionEffectDelegate>( Constants.ReceiveActionEffect, ReceiveActionEffect);
             ActorControlSelfHook = Dalamud.Hooks.HookFromSignature<ActorControlSelfDelegate>( Constants.ActorControlSig, ActorControlSelf );
             ReceiveActionEffectHook.Enable();
             ActorControlSelfHook.Enable();
@@ -114,7 +116,7 @@ namespace JobBars {
                 return;
             }
 
-            UiHelper.UpdateMp( Dalamud.ClientState.LocalPlayer.CurrentMp );
+            UiHelper.UpdateMp( Dalamud.LocalPlayer.CurrentMp );
             UiHelper.UpdatePlayerStatus();
 
             Animation.Tick();
@@ -147,7 +149,7 @@ namespace JobBars {
             CurrentJob = JobIds.OTHER;
         }
 
-        private void OnZoneChange( ushort newZoneId ) {
+        private void OnZoneChange( uint newZoneId ) {
             if( !NodeBuilder.IsLoaded ) return;
 
             GaugeManager.Reset();
@@ -156,14 +158,14 @@ namespace JobBars {
             UiHelper.ResetTicks();
         }
 
-        private void OnDutyStarted( object? sender, ushort territoryId ) {
+        private void OnDutyStarted( IDutyStateEventArgs args ) {
             // 此时通常就是 CD 重置的时机
-            Dalamud.Log( $"副本已开始，地图ID: {territoryId}" );
+            Dalamud.Log( $"副本已开始，地图ID: {args.TerritoryType.RowId}" );
             CooldownManager.ResetTrackers();
         }
 
         private static void CheckForJobChange() {
-            var job = UiHelper.IdToJob( Dalamud.ClientState.LocalPlayer.ClassJob.RowId );
+            var job = UiHelper.IdToJob( Dalamud.LocalPlayer.ClassJob.RowId );
             if( job != CurrentJob ) {
                 CurrentJob = job;
                 Dalamud.Log( $"SWITCHED JOB TO {CurrentJob}" );

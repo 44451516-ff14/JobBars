@@ -37,8 +37,8 @@ namespace JobBars.Cooldowns
         {
             _CooldownConfig = cooldownConfig;
             _ObjectId = objectId;
-            _IsLocalPlayer = Dalamud.ClientState.LocalPlayer != null && 
-                             objectId == Dalamud.ClientState.LocalPlayer.GameObjectId;
+            _IsLocalPlayer = Dalamud.LocalPlayer != null && 
+                             objectId == Dalamud.LocalPlayer.GameObjectId;
         }
 
         public static List< uint > AdjustedActionList = new()

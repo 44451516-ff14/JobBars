@@ -1,6 +1,7 @@
 namespace JobBars.Helper {
     public static class Constants {
         public static readonly string ReceiveActionEffectSig = "40 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24";
+        public static nint ReceiveActionEffect = FFXIVClientStructs.FFXIV.Client.Game.Character.ActionEffectHandler.Addresses.Receive.Value;
         public static readonly string ActorControlSig = "E8 ?? ?? ?? ?? 0F B7 0B 83 E9 64";
 
         public static readonly string PlaySoundSig = "E8 ?? ?? ?? ?? 45 0F B7 C5";
