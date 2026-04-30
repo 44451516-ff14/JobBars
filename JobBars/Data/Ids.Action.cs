@@ -102,6 +102,7 @@ namespace JobBars.Data {
         TheEwer = 4405,
         TheSpire = 4406,
         CollectiveUnconscious = 3613,
+        先天禀赋 = 3614,
         EarthlyStar = 7439,
         NeutralSect = 16559,
         Lightspeed = 3606,

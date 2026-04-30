@@ -78,7 +78,7 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.暗影墙,
                 // Duration = 15,
                 CD = 120,
-                Triggers = [new Item(ActionIds.暗影墙)]
+                Triggers = [new Item(ActionIds.暗影墙),new Item(ActionIds.ShadowedVigil)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.LivingDead), new CooldownProps {
                 Icon = ActionIds.LivingDead,

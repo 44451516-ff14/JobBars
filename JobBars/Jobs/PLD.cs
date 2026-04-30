@@ -71,7 +71,7 @@ namespace JobBars.Jobs {
                 Icon = ActionIds.预警,
                 // Duration = 15,
                 CD = 120,
-                Triggers = [new Item(ActionIds.预警)]
+                Triggers = [new Item(ActionIds.预警),new Item(ActionIds.Guardian)]
             }),
             new CooldownConfig(UiHelper.Localize(ActionIds.神圣领域), new CooldownProps {
                 Icon = ActionIds.神圣领域,

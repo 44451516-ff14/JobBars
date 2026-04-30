@@ -49,6 +49,8 @@ namespace JobBars {
                 IconManager?.PerformAction( actionItem );
             }
             if( !isPet ) {
+                
+                // Dalamud.Log($"打印5 {actionItem.Id }");
                 BuffManager?.PerformAction( actionItem, ( uint )sourceId );
                 CooldownManager?.PerformAction( actionItem, ( uint )sourceId );
             }
